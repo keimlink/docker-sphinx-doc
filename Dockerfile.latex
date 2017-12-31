@@ -1,0 +1,41 @@
+FROM python:3.6.4
+
+ARG VERSION
+
+LABEL maintainer="markus@keimlink.de"
+LABEL vcs-url="https://github.com/keimlink/docker-sphinx-doc"
+LABEL version="${VERSION}"
+
+RUN echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/backports.list \
+    && apt-get update \
+    && apt-get install --no-install-recommends --target-release jessie-backports --yes \
+        enchant \
+        latexmk \
+        texlive-fonts-recommended \
+        texlive-latex-extra \
+    && rm --force --recursive /var/lib/apt/lists/*
+
+RUN groupadd --gid 1001 app
+
+RUN useradd --create-home --gid app --home-dir /app --uid 1001 app
+
+WORKDIR /app
+
+COPY bin/docker-entrypoint.sh entrypoint.sh
+COPY requirements.pip ./
+
+ENV PIP_DISABLE_PIP_VERSION_CHECK True
+ENV PIP_NO_CACHE_DIR False
+ENV PYTHONUNBUFFERED True
+
+USER 1001
+
+RUN python -m venv .venv \
+    && . .venv/bin/activate \
+    && python -m pip install --requirement requirements.pip
+
+VOLUME /app/docs
+
+ENTRYPOINT ["/app/entrypoint.sh"]
+
+CMD ["bash"]
