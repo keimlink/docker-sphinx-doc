@@ -8,8 +8,8 @@ A Docker image for [Sphinx](http://www.sphinx-doc.org/), a documentation tool wr
 
 ## Supported tags and respective `Dockerfile` links
 
-* `1.6.5`, `latest` ([Dockerfile](https://github.com/keimlink/docker-sphinx-doc/Dockerfile))
-* `1.6.5-latex`, `latex` ([Dockerfile.latex](https://github.com/keimlink/docker-sphinx-doc/Dockerfile.latex))
+* `1.6.5`, `latest` ([Dockerfile](https://github.com/keimlink/docker-sphinx-doc/blob/master/Dockerfile))
+* `1.6.5-latex`, `latex` ([Dockerfile.latex](https://github.com/keimlink/docker-sphinx-doc/blob/master/Dockerfile.latex))
 
 ## What is Sphinx?
 
