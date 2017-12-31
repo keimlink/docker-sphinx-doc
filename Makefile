@@ -1,3 +1,5 @@
+BUILD_DATE := $$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+VCS_REF := $$(git rev-parse --short HEAD)
 VERSION := $$(grep sphinx== requirements.pip | tr -s '==' | cut -d '=' -f 2)
 
 .DEFAULT_GOAL := help
@@ -13,14 +15,18 @@ clean: ## Remove all Docker images and test artifacts
 
 .PHONY: build-alpine
 build-alpine: ## Build Alpine Docker image
-	docker build --build-arg VERSION=$(VERSION) \
+	docker build --build-arg BUILD_DATE=$(BUILD_DATE) \
+		--build-arg VCS_REF=$(VCS_REF) \
+		--build-arg VERSION=$(VERSION) \
 		--tag sphinx-doc:$(VERSION) \
 		--tag sphinx-doc:latest \
 		.
 
 .PHONY: build-debian
 build-debian: ## Build Debian Docker image
-	docker build --build-arg VERSION=$(VERSION) \
+	docker build --build-arg BUILD_DATE=$(BUILD_DATE) \
+		--build-arg VCS_REF=$(VCS_REF) \
+		--build-arg VERSION=$(VERSION) \
 		--file Dockerfile.latex \
 		--tag sphinx-doc:$(VERSION)-latex \
 		--tag sphinx-doc:latex \
