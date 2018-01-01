@@ -71,6 +71,10 @@ The `sphinx-doc` images come in many flavours, each designed for a specific use 
 
 All images have the [enchant](https://github.com/AbiWord/enchant) package installed. It is required by [sphinxcontrib-spelling](https://github.com/sphinx-contrib/spelling) to spell check the documentation.
 
+Processes inside the containers run as non-privileged user to improve [security](https://docs.docker.com/engine/security/security/#conclusions).
+
+Python packages are installed into a virtual environment to isolate them from the operating system.
+
 ## `sphinx-doc:<version>`
 
 This is the defacto image. If you are unsure about what your needs are, you probably want to use this one. It is designed to be used both as a throw away container (mount your source code and start the container to start your app), as well as the base to build other images off of. This tag is based off of [`python:alpine`](https://hub.docker.com/_/python/), which is based on the popular [Alpine Linux project](http://alpinelinux.org/), available in the [`alpine`](https://hub.docker.com/_/alpine) official image. Alpine Linux is much smaller than most distribution base images (~5MB), and thus leads to much slimmer images in general.
