@@ -37,5 +37,3 @@ RUN python -m venv .venv \
 VOLUME /app/docs
 
 ENTRYPOINT ["/app/entrypoint.sh"]
-
-CMD ["sh"]
