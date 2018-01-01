@@ -1,6 +1,6 @@
 BUILD_DATE := $$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 VCS_REF := $$(git rev-parse --short HEAD)
-VERSION := $$(grep sphinx== requirements.pip | tr -s '==' | cut -d '=' -f 2)
+VERSION := $$(grep --color=no ^sphinx== requirements.pip | tr -s '==' | cut -d '=' -f 2)
 
 .DEFAULT_GOAL := help
 
