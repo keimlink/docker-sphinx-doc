@@ -71,7 +71,7 @@ The `sphinx-doc` images come in many flavours, each designed for a specific use 
 
 All images have the [enchant](https://github.com/AbiWord/enchant) package installed. It is required by [sphinxcontrib-spelling](https://github.com/sphinx-contrib/spelling) to spell check the documentation.
 
-Processes inside the containers run as non-privileged user to improve [security](https://docs.docker.com/engine/security/security/#conclusions).
+Processes inside the containers run as [non-privileged user](http://blog.dscpl.com.au/2016/12/what-user-should-you-use-to-run-docker.html) to improve [security](https://docs.docker.com/engine/security/security/#conclusions).
 
 Python packages are installed into a virtual environment to isolate them from the operating system.
 
