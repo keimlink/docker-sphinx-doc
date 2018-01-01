@@ -1,4 +1,4 @@
-# Docker Sphinx Image
+# Sphinx Docker Image
 
 [![Docker Stars](https://img.shields.io/docker/stars/keimlink/docker-sphinx-doc.svg)](https://hub.docker.com/r/keimlink/docker-sphinx-doc/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/keimlink/docker-sphinx-doc.svg)](https://hub.docker.com/r/keimlink/docker-sphinx-doc/)
