@@ -1,5 +1,6 @@
 # Sphinx Docker Image
 
+[![CircleCI](https://circleci.com/gh/keimlink/docker-sphinx-doc.svg?style=shield)](https://circleci.com/gh/keimlink/docker-sphinx-doc)
 [![Docker Stars](https://img.shields.io/docker/stars/keimlink/docker-sphinx-doc.svg)](https://hub.docker.com/r/keimlink/docker-sphinx-doc/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/keimlink/docker-sphinx-doc.svg)](https://hub.docker.com/r/keimlink/docker-sphinx-doc/)
 [![Updates](https://pyup.io/repos/github/keimlink/docker-sphinx-doc/shield.svg)](https://pyup.io/repos/github/keimlink/docker-sphinx-doc/)
