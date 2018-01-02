@@ -8,7 +8,7 @@ RUN adduser -D -G app -h /app -u 1001 app
 
 WORKDIR /app
 
-COPY bin/docker-entrypoint.sh entrypoint.sh
+COPY bin/docker-entrypoint.sh /usr/local/bin/
 COPY requirements.pip ./
 
 ENV PIP_DISABLE_PIP_VERSION_CHECK True
@@ -36,4 +36,4 @@ LABEL org.label-schema.build-date="${BUILD_DATE}" \
 
 VOLUME /app/docs
 
-ENTRYPOINT ["/app/entrypoint.sh"]
+ENTRYPOINT ["docker-entrypoint.sh"]
