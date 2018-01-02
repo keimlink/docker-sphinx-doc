@@ -10,7 +10,7 @@ jobs:
             ./bin/build.sh keimlink/sphinx-doc latest
             ./bin/test.sh keimlink/sphinx-doc latest
             mkdir -p workspace
-            docker save keimlink/sphinx-doc:latest > workspace/sphinx-doc_latest.tar
+            ./bin/save.sh keimlink/sphinx-doc latest > workspace/sphinx-doc_latest.tar
           name: Build and test latest Docker image
       - persist_to_workspace:
           root: workspace
@@ -27,7 +27,7 @@ jobs:
             ./bin/build.sh keimlink/sphinx-doc latex
             ./bin/test.sh keimlink/sphinx-doc latex
             mkdir -p workspace
-            docker save keimlink/sphinx-doc:latex > workspace/sphinx-doc_latex.tar
+            ./bin/save.sh keimlink/sphinx-doc latex > workspace/sphinx-doc_latex.tar
           name: Build and test latex Docker image
       - persist_to_workspace:
           root: workspace
