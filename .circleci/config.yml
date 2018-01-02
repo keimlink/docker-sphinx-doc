@@ -1,52 +1,53 @@
-build-steps: &build-steps
-  - checkout
-  - setup_remote_docker
-  - run:
-      command: |
-        ./bin/build.sh ${IMAGE_NAME} ${TAG}
-        ./bin/test.sh ${IMAGE_NAME} ${TAG}
-        mkdir -p ${IMAGE_PATH}
-        docker save ${IMAGE_NAME}:${TAG} > ${IMAGE_PATH}/${IMAGE_NAME}_${TAG}.tar
-      name: Build and test ${TAG} Docker image
-  - persist_to_workspace:
-      root: ${IMAGE_PATH}
-      paths:
-        - "*.tar"
-
-job-defaults: &job-defaults
-  docker:
-    - image: docker:17.09.1-ce-git
-  environment:
-    IMAGE_NAME: keimlink/sphinx-doc
-    IMAGE_PATH: docker-images
-
 jobs:
   build-latest:
-    <<: *job-defaults
-    environment:
-      TAG: latest
-    steps:
-      - *build-steps
-  build-latex:
-    <<: *job-defaults
-    environment:
-      TAG: latex
-    steps:
-      - *build-steps
-  push:
-    <<: *job-defaults
+    docker:
+      - image: docker:17.09.1-ce-git
     steps:
       - checkout
       - setup_remote_docker
+      - run:
+          command: |
+            ./bin/build.sh keimlink/sphinx-doc latest
+            ./bin/test.sh keimlink/sphinx-doc latest
+            mkdir -p docker-images
+            docker save keimlink/sphinx-doc:latest > docker-images/sphinx-doc_latest.tar
+          name: Build and test latest Docker image
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - docker-images/*
+  build-latex:
+    docker:
+      - image: docker:17.09.1-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          command: |
+            ./bin/build.sh keimlink/sphinx-doc latex
+            ./bin/test.sh keimlink/sphinx-doc latex
+            mkdir -p docker-images
+            docker save keimlink/sphinx-doc:latex > docker-images/sphinx-doc_latex.tar
+          name: Build and test latex Docker image
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - docker-images/*
+  push:
+    docker:
+      - image: docker:17.09.1-ce-git
+    steps:
+      - setup_remote_docker
       - attach_workspace:
-          at: ${IMAGE_PATH}
+          at: /tmp/workspace
+      - checkout
       - run:
           command: |
             docker login --username ${DOCKER_LOGIN} --password ${DOCKER_PASSWORD}
-            docker load < ${IMAGE_PATH}/${IMAGE_NAME}_latest.tar
-            ./bin/push.sh ${IMAGE_NAME} latest
-            docker load < ${IMAGE_PATH}/${IMAGE_NAME}_latex.tar
-            ./bin/push.sh ${IMAGE_NAME} latex
+            docker load < /tmp/workspace/sphinx-doc_latest.tar
+            ./bin/push.sh keimlink/sphinx-doc latest
+            docker load < /tmp/workspace/sphinx-doc_latex.tar
+            ./bin/push.sh keimlink/sphinx-doc latex
           name: Push Docker images to registry
   shellcheck:
     docker:
