@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 # This file:
 #
 #  - Run smoke tests in Docker container
@@ -44,7 +44,7 @@ docker run \
 
 [ -f docs/conf.py ] && [ -f docs/Makefile ] && [ -f docs/_build/html/index.html ]
 
-if [[ ${tag} == "latex" ]]; then
+if [ "${tag}" = "latex" ]; then
     docker run \
         --interactive \
         --rm \
