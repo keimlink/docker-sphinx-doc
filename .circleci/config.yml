@@ -34,7 +34,7 @@ jobs:
     steps:
       - *build-steps
   push:
-    <<: *defaults
+    <<: *job-defaults
     steps:
       - checkout
       - setup_remote_docker
