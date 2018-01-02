@@ -3,7 +3,6 @@ jobs:
     docker:
       - image: docker:17.09.1-git
     steps:
-      - checkout
       - run:
           command: |
             make build-alpine
@@ -13,7 +12,6 @@ jobs:
     docker:
       - image: docker:17.09.1-git
     steps:
-      - checkout
       - run:
           command: |
             make build-debian
@@ -29,6 +27,14 @@ jobs:
           command: |
             docker login --username $DOCKER_LOGIN --password $DOCKER_PASSWORD
           name: Push Docker images to registry
+  yamllint:
+    docker:
+      - image: boiyaa/yamllint:1.8.1
+    steps:
+      - checkout
+      - run:
+          command: --strict .
+          name: Check all YAML files
 
 version: 2
 
@@ -36,7 +42,12 @@ workflows:
   build-push:
     jobs:
       - build-alpine:
+          requires:
+            - yamllint
       - build-debian:
+          requires:
+            - yamllint
+      - yamllint
       - push:
           filters:
             branches:
