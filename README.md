@@ -1,16 +1,16 @@
 # Sphinx Docker Image
 
-[![CircleCI](https://circleci.com/gh/keimlink/docker-sphinx-doc.svg?style=shield)](https://circleci.com/gh/keimlink/docker-sphinx-doc)
-[![Docker Stars](https://img.shields.io/docker/stars/keimlink/docker-sphinx-doc.svg)](https://hub.docker.com/r/keimlink/docker-sphinx-doc/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/keimlink/docker-sphinx-doc.svg)](https://hub.docker.com/r/keimlink/docker-sphinx-doc/)
-[![Updates](https://pyup.io/repos/github/keimlink/docker-sphinx-doc/shield.svg)](https://pyup.io/repos/github/keimlink/docker-sphinx-doc/)
+[![](https://circleci.com/gh/keimlink/docker-sphinx-doc.svg?style=shield)](https://circleci.com/gh/keimlink/docker-sphinx-doc "CircleCI Build")
+[![](https://img.shields.io/docker/stars/keimlink/sphinx-doc.svg)](https://hub.docker.com/r/keimlink/sphinx-doc/ "Docker Stars")
+[![](https://img.shields.io/docker/pulls/keimlink/sphinx-doc.svg)](https://hub.docker.com/r/keimlink/sphinx-doc/ "Docker Pulls")
+[![](https://pyup.io/repos/github/keimlink/docker-sphinx-doc/shield.svg)](https://pyup.io/repos/github/keimlink/docker-sphinx-doc/ " Python Dependency Updates")
 
 A Docker image for [Sphinx](http://www.sphinx-doc.org/), a documentation tool written in Python.
 
 ## Supported tags and respective `Dockerfile` links
 
-* `1.6.5`, `latest` ([Dockerfile](https://github.com/keimlink/docker-sphinx-doc/blob/master/Dockerfile))
-* `1.6.5-latex`, `latex` ([Dockerfile.latex](https://github.com/keimlink/docker-sphinx-doc/blob/master/Dockerfile.latex))
+* `1.6.5`, `latest` ([Dockerfile](https://github.com/keimlink/docker-sphinx-doc/blob/master/Dockerfile)) [![](https://images.microbadger.com/badges/image/keimlink/sphinx-doc.svg)](https://microbadger.com/images/keimlink/sphinx-doc "Image download size and number of layers")
+* `1.6.5-latex`, `latex` ([Dockerfile.latex](https://github.com/keimlink/docker-sphinx-doc/blob/master/Dockerfile.latex)) [![](https://images.microbadger.com/badges/image/keimlink/sphinx-doc:latex.svg)](https://microbadger.com/images/keimlink/sphinx-doc:latex "Image download size and number of layers")
 
 ## What is Sphinx?
 
