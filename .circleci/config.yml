@@ -33,7 +33,7 @@ jobs:
     steps:
       - checkout
       - run:
-          command: --strict .
+          command: yamllint --strict .
           name: Check all YAML files
 
 version: 2
