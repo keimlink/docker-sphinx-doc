@@ -1,3 +1,4 @@
+IMAGE_NAME ?= keimlink/sphinx-doc
 VERSION := $$(grep --color=no ^sphinx== requirements.pip | tr -s '==' | cut -d '=' -f 2)
 
 .DEFAULT_GOAL := help
@@ -9,27 +10,30 @@ help:
 .PHONY: clean
 clean: ## Remove all images and test artifacts
 	rm -fr docs
-	docker rmi sphinx-doc:$(VERSION) sphinx-doc:latest sphinx-doc:$(VERSION)-latex sphinx-doc:latex
+	docker rmi $(IMAGE_NAME):$(VERSION) \
+		$(IMAGE_NAME):latest \
+		$(IMAGE_NAME):$(VERSION)-latex \
+		$(IMAGE_NAME):latex
 
 .PHONY: build-latest
 build-latest: ## Build latest image
-	./bin/build.sh latest
+	./bin/build.sh $(IMAGE_NAME) latest
 
 .PHONY: build-latex
 build-latex: ## Build latex image
-	./bin/build.sh latex
+	./bin/build.sh $(IMAGE_NAME) latex
 
 .PHONY: build
 build: build-latest build-latex ## Build all images
-	docker images sphinx-doc
+	docker images $(IMAGE_NAME)
 
 .PHONY: smoke-test-latest
 smoke-test-latest: ## Run smoke tests for latest image
-	./bin/test.sh latest
+	./bin/test.sh $(IMAGE_NAME) latest
 
 .PHONY: smoke-test-latex
 smoke-test-latex: ## Run smoke tests for latex image
-	./bin/test.sh latex
+	./bin/test.sh $(IMAGE_NAME) latex
 
 .PHONY: smoke-test
 smoke-test: smoke-test-latest smoke-test-latex ## Run all smoke tests

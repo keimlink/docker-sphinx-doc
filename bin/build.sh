@@ -5,7 +5,7 @@
 #
 # Usage:
 #
-#  ./bin/build.sh [TAG]
+#  ./bin/build.sh [IMAGE] [TAG]
 
 # Exit on error. Append "|| true" if you expect an error.
 set -e
@@ -13,13 +13,10 @@ set -e
 set -o pipefail
 
 build_date=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-image="sphinx-doc"
-tag=$*
+image=$1
+tag=$2
 vcs_ref=$(git rev-parse --short HEAD)
 version=$(grep ^sphinx== requirements.pip | tr -s '==' | cut -d '=' -f 2)
-
-echo "Building ${image}:${tag}."
-echo
 
 case $tag in
     latest) docker build --build-arg BUILD_DATE="${build_date}" \

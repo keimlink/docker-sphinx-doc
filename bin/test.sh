@@ -5,37 +5,32 @@
 #
 # Usage:
 #
-#  ./bin/test.sh [TAG]
+#  ./bin/test.sh [IMAGE] [TAG]
 
 # Exit on error. Append "|| true" if you expect an error.
 set -e
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 set -o pipefail
 
-image="sphinx-doc"
-tag=$*
+image=$1
+tag=$2
 
 test_image()
 {
     cmd=$3
-    image=$1
-    tag=$2
+    img="$1:$2"
 
     rm -fr docs
 
     docker run \
         --interactive \
         --tty \
-        "${image}:${tag}" \
-        sh -c "sphinx-quickstart --author=me --project=smoke-test --quiet docs \
-            && ${cmd}"
-    container=$(docker ps --all --filter ancestor="${image}:${tag}" --format "{{.Names}}")
+        "${img}" \
+        sh -c "sphinx-quickstart --author=me --project=smoke-test --quiet docs && ${cmd}"
+    container=$(docker ps --all --filter ancestor="${img}" --format "{{.Names}}")
     docker cp "${container}:/app/docs" "$(pwd)"
     docker rm "${container}"
 }
-
-echo "Running smoke tests for ${image}:${tag}."
-echo
 
 test_image "${image}" "${tag}" "make --directory=docs html"
 

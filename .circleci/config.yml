@@ -7,8 +7,8 @@ jobs:
       - setup_remote_docker
       - run:
           command: |
-            ./bin/build.sh latest
-            ./bin/test.sh latest
+            ./bin/build.sh keimlink/sphinx-doc latest
+            ./bin/test.sh keimlink/sphinx-doc latest
           name: Build and test latest Docker image
   build-latex:
     docker:
@@ -18,8 +18,8 @@ jobs:
       - setup_remote_docker
       - run:
           command: |
-            ./bin/build.sh latex
-            ./bin/test.sh latex
+            ./bin/build.sh keimlink/sphinx-doc latex
+            ./bin/test.sh keimlink/sphinx-doc latex
           name: Build and test latex Docker image
   push:
     docker:
