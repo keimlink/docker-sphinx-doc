@@ -1,7 +1,7 @@
 jobs:
   build-latest:
     docker:
-      - image: docker:17.09.0-ce-git
+      - image: docker:17.09.1-ce-git
     steps:
       - checkout
       - setup_remote_docker:
@@ -13,7 +13,7 @@ jobs:
           name: Build and test latest Docker image
   build-latex:
     docker:
-      - image: docker:17.09.0-ce-git
+      - image: docker:17.09.1-ce-git
     steps:
       - checkout
       - setup_remote_docker:
@@ -25,7 +25,7 @@ jobs:
           name: Build and test latex Docker image
   push:
     docker:
-      - image: docker:17.09.0-ce
+      - image: docker:17.09.1-ce
     steps:
       - setup_remote_docker:
           version: 17.09.0-ce
