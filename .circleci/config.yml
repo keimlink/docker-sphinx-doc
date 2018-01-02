@@ -1,22 +1,22 @@
 jobs:
-  build-alpine:
+  build-latest:
     docker:
       - image: docker:17.09.1-git
     steps:
       - run:
           command: |
-            make build-alpine
-            make smoke-test-alpine
-          name: Build and test Alpine Docker image
-  build-debian:
+            ./bin/build.sh latest
+            ./bin/test.sh latest
+          name: Build and test latest Docker image
+  build-latex:
     docker:
       - image: docker:17.09.1-git
     steps:
       - run:
           command: |
-            make build-debian
-            make smoke-test-debian
-          name: Build and test Debian Docker image
+            ./bin/build.sh latex
+            ./bin/test.sh latex
+          name: Build and test latex Docker image
   push:
     docker:
       - image: docker:17.03.0-ce
@@ -49,11 +49,11 @@ version: 2
 workflows:
   build-push:
     jobs:
-      - build-alpine:
+      - build-latest:
           requires:
             - shellcheck
             - yamllint
-      - build-debian:
+      - build-latex:
           requires:
             - shellcheck
             - yamllint
@@ -64,6 +64,6 @@ workflows:
             branches:
               only: master
           requires:
-            - build-alpine
-            - build-debian
+            - build-latest
+            - build-latex
   version: 2

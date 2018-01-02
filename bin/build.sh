@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # This file:
 #
-#  - Run smoke tests in Docker container
+#  - Build Docker container
 #
 # Usage:
 #
-#  ./bin/test.sh [TAG]
+#  ./bin/build.sh [TAG]
 #
 # Based on a template by BASH3 Boilerplate v2.3.0
 # http://bash3boilerplate.sh/#authors
@@ -26,31 +26,27 @@ set -o pipefail
 # Turn on traces, useful while debugging but commented out by default
 # set -o xtrace
 
+build_date=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 image="sphinx-doc"
 tag=$*
+vcs_ref=$(git rev-parse --short HEAD)
+version=$(grep --color=no ^sphinx== requirements.pip | tr -s '==' | cut -d '=' -f 2)
 
-echo "Running smoke tests for ${image}:${tag}."
+echo "Building ${image}:${tag}."
 echo
 
-rm -fr docs/*
-
-docker run \
-    --interactive \
-    --rm \
-    --tty \
-    --volume "$(pwd)/docs":/app/docs \
-    "${image}:${tag}" \
-    sh -c "sphinx-quickstart --author=me --project=smoke-test --quiet docs && make --directory=docs html"
-
-[ -f docs/conf.py ] && [ -f docs/Makefile ] && [ -f docs/_build/html/index.html ]
-
-if [[ ${tag} == "latex" ]]; then
-    docker run \
-        --interactive \
-        --rm \
-        --tty \
-        --volume "$(pwd)/docs":/app/docs \
-        "${image}:${tag}" \
-        make --directory=docs latexpdf LATEXMKOPTS="-silent"
-    [ -f docs/_build/latex/smoke-test.pdf ]
-fi
+case $tag in
+    latest) docker build --build-arg BUILD_DATE="${build_date}" \
+        --build-arg VCS_REF="${vcs_ref}" \
+        --build-arg VERSION="${version}" \
+        --tag "${image}:${version}" \
+        --tag "${image}:${tag}" \
+        .;;
+    latex) docker build --build-arg BUILD_DATE="${build_date}" \
+        --build-arg VCS_REF="${vcs_ref}" \
+        --build-arg VERSION="${version}" \
+        --file Dockerfile."${tag}" \
+        --tag "${image}:${version}-${tag}" \
+        --tag "${image}:${tag}" \
+        .;;
+esac
