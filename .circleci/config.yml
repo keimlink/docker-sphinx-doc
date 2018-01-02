@@ -29,6 +29,8 @@ jobs:
       - run:
           command: |
             docker login --username $DOCKER_LOGIN --password $DOCKER_PASSWORD
+            ./bin/push.sh keimlink/sphinx-doc latest
+            ./bin/push.sh keimlink/sphinx-doc latex
           name: Push Docker images to registry
   shellcheck:
     docker:
