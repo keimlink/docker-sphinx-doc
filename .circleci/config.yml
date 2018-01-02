@@ -47,7 +47,7 @@ jobs:
     steps:
       - checkout
       - run:
-          command: yamllint --strict .
+          command: yamllint --strict .yamllint .
           name: Check all YAML files
 
 version: 2
