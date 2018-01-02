@@ -1,9 +1,11 @@
 jobs:
   build-latest:
     docker:
-      - image: docker:17.09.1-git
+      - image: docker:17.09.0-ce-git
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 17.09.0-ce-git
       - run:
           command: |
             ./bin/build.sh latest
@@ -11,9 +13,11 @@ jobs:
           name: Build and test latest Docker image
   build-latex:
     docker:
-      - image: docker:17.09.1-git
+      - image: docker:17.09.0-ce-git
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 17.09.0-ce-git
       - run:
           command: |
             ./bin/build.sh latex
@@ -21,10 +25,10 @@ jobs:
           name: Build and test latex Docker image
   push:
     docker:
-      - image: docker:17.03.0-ce
+      - image: docker:17.09.0-ce
     steps:
       - setup_remote_docker:
-          version: 17.03.0-ce-git
+          version: 17.09.0-ce
       - run:
           command: |
             docker login --username $DOCKER_LOGIN --password $DOCKER_PASSWORD
