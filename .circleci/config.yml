@@ -9,13 +9,13 @@ jobs:
           command: |
             ./bin/build.sh keimlink/sphinx-doc latest
             ./bin/test.sh keimlink/sphinx-doc latest
-            mkdir -p docker-images
-            docker save keimlink/sphinx-doc:latest > docker-images/sphinx-doc_latest.tar
+            mkdir -p workspace
+            docker save keimlink/sphinx-doc:latest > workspace/sphinx-doc_latest.tar
           name: Build and test latest Docker image
       - persist_to_workspace:
-          root: /tmp/workspace
+          root: ${CIRCLE_WORKING_DIRECTORY}
           paths:
-            - docker-images/*
+            - workspace/*
   build-latex:
     docker:
       - image: docker:17.09.1-ce-git
@@ -26,13 +26,13 @@ jobs:
           command: |
             ./bin/build.sh keimlink/sphinx-doc latex
             ./bin/test.sh keimlink/sphinx-doc latex
-            mkdir -p docker-images
-            docker save keimlink/sphinx-doc:latex > docker-images/sphinx-doc_latex.tar
+            mkdir -p workspace
+            docker save keimlink/sphinx-doc:latex > workspace/sphinx-doc_latex.tar
           name: Build and test latex Docker image
       - persist_to_workspace:
-          root: /tmp/workspace
+          root: ${CIRCLE_WORKING_DIRECTORY}
           paths:
-            - docker-images/*
+            - workspace/*
   push:
     docker:
       - image: docker:17.09.1-ce-git
