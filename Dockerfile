@@ -8,6 +8,8 @@ RUN adduser -D -G app -h /app -u 1001 app
 
 WORKDIR /app
 
+RUN mkdir docs && chown app: docs
+
 COPY bin/docker-entrypoint.sh /usr/local/bin/
 COPY requirements.pip ./
 
