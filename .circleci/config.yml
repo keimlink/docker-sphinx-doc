@@ -4,8 +4,7 @@ jobs:
       - image: docker:17.09.1-ce-git
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 17.09.0-ce-git
+      - setup_remote_docker
       - run:
           command: |
             ./bin/build.sh latest
@@ -16,8 +15,7 @@ jobs:
       - image: docker:17.09.1-ce-git
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 17.09.0-ce-git
+      - setup_remote_docker
       - run:
           command: |
             ./bin/build.sh latex
@@ -27,8 +25,7 @@ jobs:
     docker:
       - image: docker:17.09.1-ce
     steps:
-      - setup_remote_docker:
-          version: 17.09.0-ce
+      - setup_remote_docker
       - run:
           command: |
             docker login --username $DOCKER_LOGIN --password $DOCKER_PASSWORD
