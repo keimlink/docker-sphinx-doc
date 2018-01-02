@@ -13,9 +13,9 @@ jobs:
             docker save keimlink/sphinx-doc:latest > workspace/sphinx-doc_latest.tar
           name: Build and test latest Docker image
       - persist_to_workspace:
-          root: ${CIRCLE_WORKING_DIRECTORY}
+          root: workspace
           paths:
-            - workspace/*
+            - ./*
   build-latex:
     docker:
       - image: docker:17.09.1-ce-git
@@ -30,9 +30,9 @@ jobs:
             docker save keimlink/sphinx-doc:latex > workspace/sphinx-doc_latex.tar
           name: Build and test latex Docker image
       - persist_to_workspace:
-          root: ${CIRCLE_WORKING_DIRECTORY}
+          root: workspace
           paths:
-            - workspace/*
+            - ./*
   push:
     docker:
       - image: docker:17.09.1-ce-git
