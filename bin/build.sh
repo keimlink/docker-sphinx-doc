@@ -16,7 +16,7 @@ build_date=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 image="sphinx-doc"
 tag=$*
 vcs_ref=$(git rev-parse --short HEAD)
-version=$(grep --color=no ^sphinx== requirements.pip | tr -s '==' | cut -d '=' -f 2)
+version=$(grep ^sphinx== requirements.pip | tr -s '==' | cut -d '=' -f 2)
 
 echo "Building ${image}:${tag}."
 echo
