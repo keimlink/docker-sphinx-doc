@@ -74,7 +74,7 @@ All images have the [enchant](https://github.com/AbiWord/enchant) package instal
 
 Processes inside the containers run as [non-privileged user](http://blog.dscpl.com.au/2016/12/what-user-should-you-use-to-run-docker.html) to improve [security](https://docs.docker.com/engine/security/security/#conclusions).
 
-Python packages are installed into a virtual environment to isolate them from the operating system.
+Python packages are installed into a virtual environment to [isolate](https://hynek.me/articles/virtualenv-lives/) them from the operating system.
 
 ## `sphinx-doc:<version>`
 
