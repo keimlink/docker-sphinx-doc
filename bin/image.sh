@@ -82,7 +82,7 @@ image_test()
     image_test_cmd "make --directory=docs html"
     [ -f docs/conf.py ] && [ -f docs/Makefile ] && [ -f docs/_build/html/index.html ]
     if [ "${TAG}" = "latex" ]; then
-      test_image "make --directory=docs latexpdf LATEXMKOPTS='-silent'"
+      image_test_cmd "make --directory=docs latexpdf LATEXMKOPTS='-silent'"
       [ -f docs/_build/latex/smoke-test.pdf ]
     fi
 }
