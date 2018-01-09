@@ -1,7 +1,7 @@
 jobs:
   build-latest:
     docker:
-      - image: circleci/python:3.6.4
+      - image: docker:17.09.1-ce-git
     steps:
       - checkout
       - setup_remote_docker
@@ -18,7 +18,7 @@ jobs:
             - ./*
   build-latex:
     docker:
-      - image: circleci/python:3.6.4
+      - image: docker:17.09.1-ce-git
     steps:
       - checkout
       - setup_remote_docker
@@ -35,7 +35,7 @@ jobs:
             - ./*
   push:
     docker:
-      - image: circleci/python:3.6.4
+      - image: docker:17.09.1-ce-git
     steps:
       - setup_remote_docker
       - attach_workspace:
