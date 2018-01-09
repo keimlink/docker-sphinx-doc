@@ -9,11 +9,11 @@ help:
 
 .PHONY: build-latest
 build-latest: ## Build latest image
-	./bin/build.sh $(IMAGE_NAME) latest
+	./bin/image.sh build $(IMAGE_NAME) latest
 
 .PHONY: build-latex
 build-latex: ## Build latex image
-	./bin/build.sh $(IMAGE_NAME) latex
+	./bin/image.sh build $(IMAGE_NAME) latex
 
 .PHONY: build
 build: build-latest build-latex ## Build all images
@@ -21,11 +21,11 @@ build: build-latest build-latex ## Build all images
 
 .PHONY: smoke-test-latest
 smoke-test-latest: ## Run smoke tests for latest image
-	./bin/test.sh $(IMAGE_NAME) latest
+	./bin/image.sh test $(IMAGE_NAME) latest
 
 .PHONY: smoke-test-latex
 smoke-test-latex: ## Run smoke tests for latex image
-	./bin/test.sh $(IMAGE_NAME) latex
+	./bin/image.sh test $(IMAGE_NAME) latex
 
 .PHONY: smoke-test
 smoke-test: smoke-test-latest smoke-test-latex ## Run all smoke tests
