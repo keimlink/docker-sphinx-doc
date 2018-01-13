@@ -8,12 +8,13 @@
   "license": "BSD-3-Clause",
   "devDependencies": {
     "danger": "3.0.3",
+    "eclint": "2.6.0",
     "eslint": "4.15.0"
   },
   "eslintConfig": {
     "env": {
-        "es6": true,
-        "node": true
+      "es6": true,
+      "node": true
     },
     "extends": "eslint:recommended",
     "parserOptions": {
