@@ -1,28 +1,28 @@
 aliases:
-  attach_workspace: &attach_workspace
+  _working-directory: &working-directory
+    working_directory: ~/project/docker-sphinx-doc
+  attach-workspace: &attach-workspace
     attach_workspace:
       at: ~/project
   docker-defaults: &docker-defaults
     docker:
       - image: docker:17.09.1-ce-git
-    <<: *working_directory
+    <<: *working-directory
   docker-node: &docker-node
     docker:
       - image: circleci/node:8
-    <<: *working_directory
-  persist_to_workspace: &persist_to_workspace
+    <<: *working-directory
+  persist-to-workspace: &persist-to-workspace
     persist_to_workspace:
       root: ~/project
       paths:
         - docker-sphinx-doc
-  working_directory: &working_directory
-    working_directory: ~/project/docker-sphinx-doc
 
 jobs:
   analyze-pull-request:
     <<: *docker-node
     steps:
-      - *attach_workspace
+      - *attach-workspace
       - run:
           command: |
             if [ -n "${CIRCLE_PULL_REQUEST}" ]; then
@@ -34,7 +34,7 @@ jobs:
   install:
     <<: *docker-node
     steps:
-      - *attach_workspace
+      - *attach-workspace
       - restore_cache:
           keys:
             - v1-node-{{ .Branch }}-{{ checksum "yarn.lock" }}
@@ -49,11 +49,11 @@ jobs:
           name: Save node_modules cache
           paths:
             - node_modules
-      - *persist_to_workspace
+      - *persist-to-workspace
   build-latest:
     <<: *docker-defaults
     steps:
-      - *attach_workspace
+      - *attach-workspace
       - setup_remote_docker
       - run:
           command: |
@@ -62,11 +62,11 @@ jobs:
             mkdir -p docker-images
             ./bin/image.sh save keimlink/sphinx-doc latest > docker-images/sphinx-doc_latest.tar
           name: Build and test latest Docker image
-      - *persist_to_workspace
+      - *persist-to-workspace
   build-latex:
     <<: *docker-defaults
     steps:
-      - *attach_workspace
+      - *attach-workspace
       - setup_remote_docker
       - run:
           command: |
@@ -75,24 +75,24 @@ jobs:
             mkdir -p docker-images
             ./bin/image.sh save keimlink/sphinx-doc latex > docker-images/sphinx-doc_latex.tar
           name: Build and test latex Docker image
-      - *persist_to_workspace
+      - *persist-to-workspace
   checkout:
     <<: *docker-defaults
     steps:
-      - *attach_workspace
+      - *attach-workspace
       - checkout
-      - *persist_to_workspace
+      - *persist-to-workspace
   eclint:
     <<: *docker-node
     steps:
-      - *attach_workspace
+      - *attach-workspace
       - run:
           command: yarn eclint check  "**" "!*.swp" "!docs/**" "!yarn.lock"
           name: Validate EditorConfig settings
   eslint:
     <<: *docker-node
     steps:
-      - *attach_workspace
+      - *attach-workspace
       - run:
           command: yarn eslint . --ext .js
           name: Check all JavaScript files
@@ -100,7 +100,7 @@ jobs:
     <<: *docker-defaults
     steps:
       - setup_remote_docker
-      - *attach_workspace
+      - *attach-workspace
       - run:
           command: |
             docker login --username ${DOCKER_LOGIN} --password ${DOCKER_PASSWORD}
@@ -112,18 +112,18 @@ jobs:
   shellcheck:
     docker:
       - image: koalaman/shellcheck-alpine:v0.4.7
-    <<: *working_directory
+    <<: *working-directory
     steps:
-      - *attach_workspace
+      - *attach-workspace
       - run:
           command: find . -name "*.sh" -exec shellcheck {} +
           name: Check all shell scripts
   yamllint:
     docker:
       - image: boiyaa/yamllint:1.8.1
-    <<: *working_directory
+    <<: *working-directory
     steps:
-      - *attach_workspace
+      - *attach-workspace
       - run:
           command: yamllint --strict .yamllint .
           name: Check all YAML files
