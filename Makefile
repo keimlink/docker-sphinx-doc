@@ -19,6 +19,10 @@ build-latex: ## Build latex image
 build: build-latest build-latex ## Build all images
 	docker images $(IMAGE_NAME)
 
+.PHONY: install
+install: ## Install dependencies
+	yarn install
+
 .PHONY: smoke-test-latest
 smoke-test-latest: ## Run smoke tests for latest image
 	./bin/image.sh test $(IMAGE_NAME) latest
