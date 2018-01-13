@@ -114,7 +114,9 @@ jobs:
       - image: koalaman/shellcheck-alpine:v0.4.7
     <<: *working-directory
     steps:
-      - *attach-workspace
+      # ca-certificates package is not installed in shellcheck container.
+      # Without this package attach_workspace will fail.
+      - checkout
       - run:
           command: find . -name "*.sh" -exec shellcheck {} +
           name: Check all shell scripts
@@ -166,9 +168,7 @@ workflows:
       - install:
           requires:
             - checkout
-      - shellcheck:
-          requires:
-            - checkout
+      - shellcheck
       - yamllint:
           requires:
             - checkout
