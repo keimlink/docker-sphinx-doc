@@ -20,13 +20,13 @@ build-latex: ## Build latex image
 build: build-latest build-latex ## Build all images
 	docker images $(IMAGE_NAME)
 
-.PHONY: install
-install: ## Install dependencies
-	yarn install
-
 .PHONY: lint
 lint: ## Run lint checks
-	yarn eslint . --ext .js
+	docker run --interactive --rm --tty --volume $$(pwd):/home/node/src node:8.9.4-alpine \
+		su - node -c 'cd src \
+			&& yarn install \
+			&& yarn eslint . --ext .js \
+			&& yarn eclint check  "**" "!*.swp" "!docs/**" "!yarn.lock"'
 	find . $(FIND_EXCLUDE_PATHS) -name "*.sh" -exec \
 		docker run --interactive --rm --tty --volume $$(pwd):/mnt koalaman/shellcheck-alpine:v0.4.7 {} +
 	docker run --interactive --rm --tty --volume $$(pwd):/workdir boiyaa/yamllint:1.8.1 --strict .yamllint .
