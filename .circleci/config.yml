@@ -134,6 +134,7 @@ workflows:
   build-push:
     jobs:
       - analyze-pull-request:
+          context: org-global
           filters:
             branches:
               ignore:
