@@ -1,3 +1,4 @@
+FIND_EXCLUDE_PATHS ?= -not -path './.*/*' -not -path './node_modules/*'
 IMAGE_NAME ?= keimlink/sphinx-doc
 VERSION := $$(grep --color=no ^sphinx== requirements.pip | tr -s '==' | cut -d '=' -f 2)
 
@@ -22,6 +23,13 @@ build: build-latest build-latex ## Build all images
 .PHONY: install
 install: ## Install dependencies
 	yarn install
+
+.PHONY: lint
+lint: ## Run lint checks
+	yarn eslint . --ext .js
+	find . $(FIND_EXCLUDE_PATHS) -name "*.sh" -exec \
+		docker run --interactive --rm --tty --volume $$(pwd):/mnt koalaman/shellcheck-alpine:v0.4.7 {} +
+	docker run --interactive --rm --tty --volume $$(pwd):/workdir boiyaa/yamllint:1.8.1 --strict .yamllint .
 
 .PHONY: smoke-test-latest
 smoke-test-latest: ## Run smoke tests for latest image
