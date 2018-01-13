@@ -1,67 +1,129 @@
-jobs:
-  build-latest:
+aliases:
+  attach_workspace: &attach_workspace
+    attach_workspace:
+      at: ~/project
+  docker-defaults: &docker-defaults
     docker:
       - image: docker:17.09.1-ce-git
+    <<: *working_directory
+  docker-node: &docker-node
+    docker:
+      - image: circleci/node:8
+    <<: *working_directory
+  persist_to_workspace: &persist_to_workspace
+    persist_to_workspace:
+      root: ~/project
+      paths:
+        - docker-sphinx-doc
+  working_directory: &working_directory
+    working_directory: ~/project/docker-sphinx-doc
+
+jobs:
+  analyze-pull-request:
+    <<: *docker-node
     steps:
-      - checkout
+      - *attach_workspace
+      - run:
+          command: |
+            if [ -n "${CIRCLE_PULL_REQUEST}" ]; then
+              yarn danger
+            else
+              echo "Skipping Pull Request analysis."
+            fi
+          name: Analyze Pull Request
+  install:
+    <<: *docker-node
+    steps:
+      - *attach_workspace
+      - restore_cache:
+          keys:
+            - v1-node-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - v1-node-{{ .Branch }}-
+            - v1-node-
+          name: Restore node_modules cache
+      - run:
+          command: yarn install --frozen-lockfile
+          name: Install dependencies
+      - save_cache:
+          key: v1-node-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          name: Save node_modules cache
+          paths:
+            - node_modules
+      - *persist_to_workspace
+  build-latest:
+    <<: *docker-defaults
+    steps:
+      - *attach_workspace
       - setup_remote_docker
       - run:
           command: |
             ./bin/image.sh build keimlink/sphinx-doc latest
             ./bin/image.sh test keimlink/sphinx-doc latest
-            mkdir -p workspace
-            ./bin/image.sh save keimlink/sphinx-doc latest > workspace/sphinx-doc_latest.tar
+            mkdir -p docker-images
+            ./bin/image.sh save keimlink/sphinx-doc latest > docker-images/sphinx-doc_latest.tar
           name: Build and test latest Docker image
-      - persist_to_workspace:
-          root: workspace
-          paths:
-            - ./*
+      - *persist_to_workspace
   build-latex:
-    docker:
-      - image: docker:17.09.1-ce-git
+    <<: *docker-defaults
     steps:
-      - checkout
+      - *attach_workspace
       - setup_remote_docker
       - run:
           command: |
             ./bin/image.sh build keimlink/sphinx-doc latex
             ./bin/image.sh test keimlink/sphinx-doc latex
-            mkdir -p workspace
-            ./bin/image.sh save keimlink/sphinx-doc latex > workspace/sphinx-doc_latex.tar
+            mkdir -p docker-images
+            ./bin/image.sh save keimlink/sphinx-doc latex > docker-images/sphinx-doc_latex.tar
           name: Build and test latex Docker image
-      - persist_to_workspace:
-          root: workspace
-          paths:
-            - ./*
+      - *persist_to_workspace
+  checkout:
+    <<: *docker-defaults
+    steps:
+      - *attach_workspace
+      - checkout
+      - *persist_to_workspace
+  eclint:
+    <<: *docker-node
+    steps:
+      - *attach_workspace
+      - run:
+          command: yarn eclint check  "**" "!*.swp" "!docs/**" "!yarn.lock"
+          name: Validate EditorConfig settings
+  eslint:
+    <<: *docker-node
+    steps:
+      - *attach_workspace
+      - run:
+          command: yarn eslint . --ext .js
+          name: Check all JavaScript files
   push:
-    docker:
-      - image: docker:17.09.1-ce-git
+    <<: *docker-defaults
     steps:
       - setup_remote_docker
-      - attach_workspace:
-          at: /tmp/workspace
-      - checkout
+      - *attach_workspace
       - run:
           command: |
             docker login --username ${DOCKER_LOGIN} --password ${DOCKER_PASSWORD}
-            docker load < /tmp/workspace/sphinx-doc_latest.tar
+            docker load < docker-images/sphinx-doc_latest.tar
             ./bin/image.sh push keimlink/sphinx-doc latest
-            docker load < /tmp/workspace/sphinx-doc_latex.tar
+            docker load < docker-images/sphinx-doc_latex.tar
             ./bin/image.sh push keimlink/sphinx-doc latex
           name: Push Docker images to registry
   shellcheck:
     docker:
       - image: koalaman/shellcheck-alpine:v0.4.7
+    <<: *working_directory
     steps:
-      - checkout
+      - *attach_workspace
       - run:
           command: find . -name "*.sh" -exec shellcheck {} +
           name: Check all shell scripts
   yamllint:
     docker:
       - image: boiyaa/yamllint:1.8.1
+    <<: *working_directory
     steps:
-      - checkout
+      - *attach_workspace
       - run:
           command: yamllint --strict .yamllint .
           name: Check all YAML files
@@ -71,16 +133,44 @@ version: 2
 workflows:
   build-push:
     jobs:
+      - analyze-pull-request:
+          filters:
+            branches:
+              ignore:
+                - develop
+                - master
+          requires:
+            - install
       - build-latest:
           requires:
+            - analyze-pull-request
+            - eclint
+            - eslint
             - shellcheck
             - yamllint
       - build-latex:
           requires:
+            - analyze-pull-request
+            - eclint
+            - eslint
             - shellcheck
             - yamllint
-      - shellcheck
-      - yamllint
+      - checkout
+      - eclint:
+          requires:
+            - install
+      - eslint:
+          requires:
+            - install
+      - install:
+          requires:
+            - checkout
+      - shellcheck:
+          requires:
+            - checkout
+      - yamllint:
+          requires:
+            - checkout
       - push:
           filters:
             branches:
