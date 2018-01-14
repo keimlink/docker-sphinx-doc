@@ -26,7 +26,7 @@ jobs:
       - run:
           command: |
             if [ -n "${CIRCLE_PULL_REQUEST}" ]; then
-              yarn danger
+              yarn danger ci
             else
               echo "Skipping Pull Request analysis."
             fi
