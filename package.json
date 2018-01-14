@@ -7,7 +7,7 @@
   "author": "Markus Zapke-Gründemann <markus@keimlink.de>",
   "license": "BSD-3-Clause",
   "devDependencies": {
-    "danger": "3.0.3",
+    "danger": "3.0.4",
     "eclint": "2.6.0",
     "eslint": "4.15.0",
     "greenkeeper-lockfile": "^1.12.0"
