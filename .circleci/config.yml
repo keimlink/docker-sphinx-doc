@@ -192,6 +192,7 @@ workflows:
           requires:
             - install
       - greenkeeper-lockfile-upload:
+          context: org-global
           filters:
             branches:
               only: /^greenkeeper\/.*/
