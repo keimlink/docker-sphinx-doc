@@ -49,7 +49,7 @@ jobs:
             - v1-node-
           name: Restore node_modules cache
       - run:
-          command: yarn install
+          command: yarn install --pure-lockfile
           name: Install dependencies
       - save_cache:
           key: v1-node-{{ .Branch }}-{{ checksum "yarn.lock" }}
