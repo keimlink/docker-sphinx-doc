@@ -199,6 +199,7 @@ workflows:
           requires:
             - build-latest
             - build-latex
+            - greenkeeper-lockfile-update
       - install:
           requires:
             - checkout
