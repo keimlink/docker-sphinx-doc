@@ -49,7 +49,7 @@ jobs:
             - v1-node-
           name: Restore node_modules cache
       - run:
-          command: yarn install --frozen-lockfile
+          command: yarn install
           name: Install dependencies
       - save_cache:
           key: v1-node-{{ .Branch }}-{{ checksum "yarn.lock" }}
@@ -151,6 +151,13 @@ jobs:
       - run:
           command: yamllint --strict .yamllint .
           name: Check all YAML files
+  yarn-check:
+    <<: *docker-node
+    steps:
+      - *attach-workspace
+      - run:
+          command: yarn check
+          name: Check yarn.lock
 
 version: 2
 
@@ -217,4 +224,7 @@ workflows:
           requires:
             - build-latest
             - build-latex
+      - yarn-check:
+            requires:
+              - install
   version: 2
