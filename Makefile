@@ -31,6 +31,10 @@ lint: ## Run lint checks
 		docker run --interactive --rm --tty --volume $$(pwd):/mnt koalaman/shellcheck-alpine:v0.4.7 {} +
 	docker run --interactive --rm --tty --volume $$(pwd):/workdir boiyaa/yamllint:1.8.1 --strict .yamllint .
 
+.PHONY: node
+node: ## Run node container
+	docker run --interactive --rm --tty --volume $$(pwd):/home/node/src node:8.9.4-alpine su - node
+
 .PHONY: smoke-test-latest
 smoke-test-latest: ## Run smoke tests for latest image
 	./bin/image.sh test $(IMAGE_NAME) latest
