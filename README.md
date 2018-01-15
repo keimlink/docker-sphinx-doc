@@ -1,11 +1,10 @@
 # Sphinx Docker Image
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/keimlink/docker-sphinx-doc.svg)](https://greenkeeper.io/)
-
 [![](https://circleci.com/gh/keimlink/docker-sphinx-doc.svg?style=shield)](https://circleci.com/gh/keimlink/docker-sphinx-doc "CircleCI Build")
 [![](https://img.shields.io/docker/stars/keimlink/sphinx-doc.svg)](https://hub.docker.com/r/keimlink/sphinx-doc/ "Docker Stars")
 [![](https://img.shields.io/docker/pulls/keimlink/sphinx-doc.svg)](https://hub.docker.com/r/keimlink/sphinx-doc/ "Docker Pulls")
 [![](https://pyup.io/repos/github/keimlink/docker-sphinx-doc/shield.svg)](https://pyup.io/repos/github/keimlink/docker-sphinx-doc/ " Python Dependency Updates")
+[![](https://badges.greenkeeper.io/keimlink/docker-sphinx-doc.svg)](https://greenkeeper.io/ "Greenkeeper")
 
 A Docker image for [Sphinx](http://www.sphinx-doc.org/), a documentation tool written in Python.
 
