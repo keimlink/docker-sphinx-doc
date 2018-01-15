@@ -17,6 +17,11 @@ aliases:
       root: ~/project
       paths:
         - docker-sphinx-doc
+  persist-docker-images: &persist-docker-images
+    persist_to_workspace:
+      root: ~/project
+      paths:
+        - docker-sphinx-doc/docker-images
 
 jobs:
   analyze-pull-request:
@@ -64,7 +69,7 @@ jobs:
             mkdir -p docker-images
             ./bin/image.sh save keimlink/sphinx-doc latest > docker-images/sphinx-doc_latest.tar
           name: Build and test latest Docker image
-      - *persist-to-workspace
+      - *persist-docker-images
   build-latex:
     <<: *docker-defaults
     steps:
@@ -77,7 +82,7 @@ jobs:
             mkdir -p docker-images
             ./bin/image.sh save keimlink/sphinx-doc latex > docker-images/sphinx-doc_latex.tar
           name: Build and test latex Docker image
-      - *persist-to-workspace
+      - *persist-docker-images
   checkout:
     <<: *docker-defaults
     steps:
@@ -98,6 +103,21 @@ jobs:
       - run:
           command: yarn eslint . --ext .js
           name: Check all JavaScript files
+  greenkeeper-lockfile-update:
+    <<: *docker-node
+    steps:
+      - *attach-workspace
+      - run:
+          command: yarn run greenkeeper-lockfile-update
+          name: Update yarn.lock
+      - *persist-to-workspace
+  greenkeeper-lockfile-upload:
+    <<: *docker-node
+    steps:
+      - *attach-workspace
+      - run:
+          command: yarn run greenkeeper-lockfile-upload
+          name: Upload yarn.lock
   push:
     <<: *docker-defaults
     steps:
@@ -167,6 +187,21 @@ workflows:
       - eslint:
           requires:
             - install
+      - greenkeeper-lockfile-update:
+          filters:
+            branches:
+              only: /^greenkeeper\/.*/
+          requires:
+            - install
+      - greenkeeper-lockfile-upload:
+          context: org-global
+          filters:
+            branches:
+              only: /^greenkeeper\/.*/
+          requires:
+            - build-latest
+            - build-latex
+            - greenkeeper-lockfile-update
       - install:
           requires:
             - checkout
@@ -175,6 +210,7 @@ workflows:
           requires:
             - checkout
       - push:
+          context: org-global
           filters:
             branches:
               only: master
