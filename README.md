@@ -7,6 +7,13 @@
 
 A Docker image for [Sphinx](http://www.sphinx-doc.org/), a documentation tool written in Python.
 
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
 ## Supported tags and respective `Dockerfile` links
 
 * `1.6.6`, `latest` ([Dockerfile](https://github.com/keimlink/docker-sphinx-doc/blob/master/Dockerfile)) [![](https://images.microbadger.com/badges/image/keimlink/sphinx-doc.svg)](https://microbadger.com/images/keimlink/sphinx-doc "Image download size and number of layers")
