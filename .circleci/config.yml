@@ -28,7 +28,9 @@ jobs:
             if [ -n "${CIRCLE_PULL_REQUEST}" ]; then
               yarn danger ci
             else
-              echo "Skipping Pull Request analysis."
+              echo "Skipping Pull Request analysis." \
+                "Please create a Pull Request to merge your changes."
+              exit 1
             fi
           name: Analyze Pull Request
   install:
