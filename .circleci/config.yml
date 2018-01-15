@@ -17,6 +17,11 @@ aliases:
       root: ~/project
       paths:
         - docker-sphinx-doc
+  persist-docker-images: &persist-docker-images
+    persist_to_workspace:
+      root: ~/project
+      paths:
+        - docker-sphinx-doc/docker-images
 
 jobs:
   analyze-pull-request:
@@ -62,7 +67,7 @@ jobs:
             mkdir -p docker-images
             ./bin/image.sh save keimlink/sphinx-doc latest > docker-images/sphinx-doc_latest.tar
           name: Build and test latest Docker image
-      - *persist-to-workspace
+      - *persist-docker-images
   build-latex:
     <<: *docker-defaults
     steps:
@@ -75,7 +80,7 @@ jobs:
             mkdir -p docker-images
             ./bin/image.sh save keimlink/sphinx-doc latex > docker-images/sphinx-doc_latex.tar
           name: Build and test latex Docker image
-      - *persist-to-workspace
+      - *persist-docker-images
   checkout:
     <<: *docker-defaults
     steps:
