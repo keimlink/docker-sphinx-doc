@@ -24,13 +24,13 @@ A Docker image for [Sphinx](http://www.sphinx-doc.org/), a documentation tool wr
 First run `sphinx-quickstart` to set up a source directory and a configuration:
 
 ```console
-$ docker run -it --rm -v "$(pwd)/docs":/app/docs keimlink/sphinx-doc sphinx-quickstart docs
+$ docker run -it --rm -v "$(pwd)/docs":/app/docs keimlink/sphinx-doc:1.6.6 sphinx-quickstart docs
 ```
 
 Then build the HTML documentation:
 
 ```console
-$ docker run -it --rm -v "$(pwd)/docs":/app/docs keimlink/sphinx-doc make -C docs html
+$ docker run -it --rm -v "$(pwd)/docs":/app/docs keimlink/sphinx-doc:1.6.6 make -C docs html
 ```
 
 ### Create a `Dockerfile` for your Sphinx project
@@ -46,7 +46,7 @@ sphinx-autobuild==0.7.1
 Then create the `Dockerfile`:
 
 ```dockerfile
-FROM keimlink/sphinx-doc
+FROM keimlink/sphinx-doc:1.6.6
 
 COPY requirements.pip ./
 
