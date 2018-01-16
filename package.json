@@ -2,7 +2,7 @@
   "name": "docker-sphinx-doc",
   "version": "1.6.6",
   "description": "A Docker image for Sphinx, a documentation tool written in Python.",
-  "main": "index.js",
+  "main": "dangerfile.js",
   "repository": "git@github.com:keimlink/docker-sphinx-doc.git",
   "author": "Markus Zapke-Gründemann <markus@keimlink.de>",
   "license": "BSD-3-Clause",
