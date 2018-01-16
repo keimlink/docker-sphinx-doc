@@ -118,6 +118,13 @@ jobs:
       - run:
           command: yarn run greenkeeper-lockfile-upload
           name: Upload yarn.lock
+  markdownlint:
+    <<: *docker-node
+    steps:
+      - *attach-workspace
+      - run:
+          command: yarn markdownlint "**.md"
+          name: Validate all Markdown files
   push:
     <<: *docker-defaults
     steps:
@@ -178,6 +185,7 @@ workflows:
             - analyze-pull-request
             - eclint
             - eslint
+            - markdownlint
             - shellcheck
             - yamllint
       - build-latex:
@@ -185,6 +193,7 @@ workflows:
             - analyze-pull-request
             - eclint
             - eslint
+            - markdownlint
             - shellcheck
             - yamllint
       - checkout
@@ -212,6 +221,9 @@ workflows:
       - install:
           requires:
             - checkout
+      - markdownlint:
+          requires:
+            - install
       - shellcheck
       - yamllint:
           requires:
