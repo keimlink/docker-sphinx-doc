@@ -437,9 +437,9 @@ ctype@0.5.3:
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/ctype/-/ctype-0.5.3.tgz#82c18c2461f74114ef16c135224ad0b9144ca12f"
 
-danger@3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/danger/-/danger-3.0.4.tgz#df8bb80ec9e220f68718e0c7ce83efb7fe5b5367"
+danger@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/danger/-/danger-3.0.5.tgz#02d3a8b6cc3df6637da27c88326744e5c1f410ec"
   dependencies:
     babel-polyfill "^6.23.0"
     chalk "^2.3.0"
