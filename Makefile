@@ -1,6 +1,5 @@
 FIND_EXCLUDE_PATHS ?= -not -path './.*/*' -not -path './node_modules/*'
 IMAGE_NAME ?= keimlink/sphinx-doc
-VERSION := $$(grep --color=no ^sphinx== requirements.pip | tr -s '==' | cut -d '=' -f 2)
 
 .DEFAULT_GOAL := help
 
