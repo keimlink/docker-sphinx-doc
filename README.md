@@ -24,13 +24,13 @@ A Docker image for [Sphinx](http://www.sphinx-doc.org/), a documentation tool wr
 First run `sphinx-quickstart` to set up a source directory and a configuration:
 
 ```console
-$ docker run -it --rm -v "$(pwd)/docs":/app/docs keimlink/sphinx-doc:1.6.6 sphinx-quickstart docs
+docker run -it --rm -v "$(pwd)/docs":/app/docs keimlink/sphinx-doc:1.6.6 sphinx-quickstart docs
 ```
 
 Then build the HTML documentation:
 
 ```console
-$ docker run -it --rm -v "$(pwd)/docs":/app/docs keimlink/sphinx-doc:1.6.6 make -C docs html
+docker run -it --rm -v "$(pwd)/docs":/app/docs keimlink/sphinx-doc:1.6.6 make -C docs html
 ```
 
 ### Create a `Dockerfile` for your Sphinx project
@@ -39,7 +39,7 @@ If you want to extend the image you can create a `Dockerfile` for your Sphinx pr
 
 Start with a requirements file called `requirements.pip`:
 
-```
+```console
 sphinx-autobuild==0.7.1
 ```
 
@@ -61,11 +61,11 @@ CMD ["sphinx-autobuild", "--host", "0.0.0.0", "--port", "8000", "/app/docs", "/a
 Now build the image and run the container:
 
 ```console
-$ docker build -t sphinx-autobuild .
-$ docker run -it -p 8000:8000 --rm -v "$(pwd)/docs":/app/docs sphinx-autobuild
+docker build -t sphinx-autobuild .
+docker run -it -p 8000:8000 --rm -v "$(pwd)/docs":/app/docs sphinx-autobuild
 ```
 
-The documentation should served at http://127.0.0.1:8000. It will be rebuild when a file is changed.
+The documentation should served at <http://127.0.0.1:8000>. It will be rebuild when a file is changed.
 
 ## Image Variants
 
