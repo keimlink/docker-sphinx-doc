@@ -1,5 +1,5 @@
 FIND_EXCLUDE_PATHS ?= -not -path './.*/*' -not -path './node_modules/*'
-IMAGE_NAME ?= keimlink/sphinx-doc
+IMAGE_NAME ?= sphinx-doc
 
 .DEFAULT_GOAL := help
 
