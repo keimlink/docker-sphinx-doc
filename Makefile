@@ -19,6 +19,11 @@ build-latex: ## Build latex image
 build: build-latest build-latex ## Build all images
 	docker images $(IMAGE_NAME)
 
+.PHONY: clean
+clean: ## Remove all images and test artifacts
+	rm -fr docs
+	docker rmi --force $$(docker images --quiet $(IMAGE_NAME)* | uniq)
+
 .PHONY: lint
 lint: ## Run lint checks
 	docker run --interactive --rm --tty --volume $$(pwd):/home/node/src node:8.9.4-alpine \
