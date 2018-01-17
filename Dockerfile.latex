@@ -9,13 +9,13 @@ RUN echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sou
         texlive-latex-extra \
     && rm --force --recursive /var/lib/apt/lists/*
 
-RUN groupadd --gid 1001 app
+RUN groupadd --gid 1001 python
 
-RUN useradd --create-home --gid app --home-dir /app --uid 1001 app
+RUN useradd --create-home --gid python --uid 1001 python
 
-WORKDIR /app
+WORKDIR /home/python
 
-RUN mkdir docs && chown app: docs
+RUN mkdir docs && chown python: docs
 
 COPY bin/docker-entrypoint.sh /usr/local/bin/
 COPY requirements.pip ./
@@ -43,6 +43,6 @@ LABEL org.label-schema.vendor="Markus Zapke-Gründemann"
 LABEL org.label-schema.version="${VERSION}"
 LABEL org.label-schema.schema-version="1.0"
 
-VOLUME /app/docs
+VOLUME /home/python/docs
 
 ENTRYPOINT ["docker-entrypoint.sh"]

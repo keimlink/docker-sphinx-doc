@@ -24,13 +24,13 @@ A Docker image for [Sphinx](http://www.sphinx-doc.org/), a documentation tool wr
 First run `sphinx-quickstart` to set up a source directory and a configuration:
 
 ```console
-docker run -it --rm -v "$(pwd)/docs":/app/docs keimlink/sphinx-doc:1.6.6 sphinx-quickstart docs
+docker run -it --rm -v "$(pwd)/docs":/home/python/docs keimlink/sphinx-doc:1.6.6 sphinx-quickstart docs
 ```
 
 Then build the HTML documentation:
 
 ```console
-docker run -it --rm -v "$(pwd)/docs":/app/docs keimlink/sphinx-doc:1.6.6 make -C docs html
+docker run -it --rm -v "$(pwd)/docs":/home/python/docs keimlink/sphinx-doc:1.6.6 make -C docs html
 ```
 
 ### Create a `Dockerfile` for your Sphinx project
@@ -55,14 +55,14 @@ RUN . .venv/bin/activate \
 
 EXPOSE 8000
 
-CMD ["sphinx-autobuild", "--host", "0.0.0.0", "--port", "8000", "/app/docs", "/app/docs/_build/html"]
+CMD ["sphinx-autobuild", "--host", "0.0.0.0", "--port", "8000", "/home/python/docs", "/home/python/docs/_build/html"]
 ```
 
 Now build the image and run the container:
 
 ```console
 docker build -t sphinx-autobuild .
-docker run -it -p 8000:8000 --rm -v "$(pwd)/docs":/app/docs sphinx-autobuild
+docker run -it -p 8000:8000 --rm -v "$(pwd)/docs":/home/python/docs sphinx-autobuild
 ```
 
 The documentation should served at <http://127.0.0.1:8000>. It will be rebuild when a file is changed.
@@ -73,7 +73,7 @@ The `sphinx-doc` images come in many flavours, each designed for a specific use 
 
 All images have the [enchant](https://github.com/AbiWord/enchant) package installed. It is required by [sphinxcontrib-spelling](https://github.com/sphinx-contrib/spelling) to spell check the documentation.
 
-Processes inside the containers run as [non-privileged user](http://blog.dscpl.com.au/2016/12/what-user-should-you-use-to-run-docker.html) to improve [security](https://docs.docker.com/engine/security/security/#conclusions).
+Processes inside the containers run as [non-privileged user](http://blog.dscpl.com.au/2016/12/what-user-should-you-use-to-run-docker.html) `python` to improve [security](https://docs.docker.com/engine/security/security/#conclusions).
 
 Python packages are installed into a virtual environment to [isolate](https://hynek.me/articles/virtualenv-lives/) them from the operating system.
 

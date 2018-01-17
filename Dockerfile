@@ -2,13 +2,13 @@ FROM python:3.6.4-alpine3.7
 
 RUN apk add --no-cache enchant make
 
-RUN addgroup -g 1001 app
+RUN addgroup -g 1001 python
 
-RUN adduser -D -G app -h /app -u 1001 app
+RUN adduser -D -G python -u 1001 python
 
-WORKDIR /app
+WORKDIR /home/python
 
-RUN mkdir docs && chown app: docs
+RUN mkdir docs && chown python: docs
 
 COPY bin/docker-entrypoint.sh /usr/local/bin/
 COPY requirements.pip ./
@@ -36,6 +36,6 @@ LABEL org.label-schema.vendor="Markus Zapke-Gründemann"
 LABEL org.label-schema.version="${VERSION}"
 LABEL org.label-schema.schema-version="1.0"
 
-VOLUME /app/docs
+VOLUME /home/python/docs
 
 ENTRYPOINT ["docker-entrypoint.sh"]
