@@ -1531,7 +1531,7 @@ markdown-it@8.3.2:
     mdurl "^1.0.1"
     uc.micro "^1.0.3"
 
-markdownlint-cli@^0.6.0:
+markdownlint-cli@0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/markdownlint-cli/-/markdownlint-cli-0.6.0.tgz#f712e814d2909ea757724a31ccd96dabc21554ef"
   dependencies:

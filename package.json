@@ -11,7 +11,7 @@
     "eclint": "2.6.0",
     "eslint": "4.15.0",
     "greenkeeper-lockfile": "1.12.0",
-    "markdownlint-cli": "^0.6.0"
+    "markdownlint-cli": "0.6.0"
   },
   "eslintConfig": {
     "env": {
