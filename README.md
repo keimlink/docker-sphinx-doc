@@ -4,6 +4,7 @@
 [![Docker Stars](https://img.shields.io/docker/stars/keimlink/sphinx-doc.svg)](https://hub.docker.com/r/keimlink/sphinx-doc/ "Docker Stars")
 [![Docker Pulls](https://img.shields.io/docker/pulls/keimlink/sphinx-doc.svg)](https://hub.docker.com/r/keimlink/sphinx-doc/ "Docker Pulls")
 [![Python Dependency Updates](https://pyup.io/repos/github/keimlink/docker-sphinx-doc/shield.svg)](https://pyup.io/repos/github/keimlink/docker-sphinx-doc/ " Python Dependency Updates")
+[![bitHound Dev Dependencies](https://www.bithound.io/github/keimlink/docker-sphinx-doc/badges/devDependencies.svg)](https://www.bithound.io/github/keimlink/docker-sphinx-doc/develop/dependencies/npm "bitHound Dev Dependencies")
 [![Greenkeeper](https://badges.greenkeeper.io/keimlink/docker-sphinx-doc.svg)](https://greenkeeper.io/ "Greenkeeper")
 
 A Docker image for [Sphinx](http://www.sphinx-doc.org/), a documentation tool written in Python.
