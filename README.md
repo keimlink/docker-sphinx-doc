@@ -3,7 +3,7 @@
 [![CircleCI Build](https://circleci.com/gh/keimlink/docker-sphinx-doc.svg?style=shield)](https://circleci.com/gh/keimlink/workflows/docker-sphinx-doc "CircleCI Build")
 [![Docker Stars](https://img.shields.io/docker/stars/keimlink/sphinx-doc.svg)](https://hub.docker.com/r/keimlink/sphinx-doc/ "Docker Stars")
 [![Docker Pulls](https://img.shields.io/docker/pulls/keimlink/sphinx-doc.svg)](https://hub.docker.com/r/keimlink/sphinx-doc/ "Docker Pulls")
-[![Python Dependency Updates](https://pyup.io/repos/github/keimlink/docker-sphinx-doc/shield.svg)](https://pyup.io/repos/github/keimlink/docker-sphinx-doc/ " Python Dependency Updates")
+[![Python Dependency Updates](https://pyup.io/repos/github/keimlink/docker-sphinx-doc/shield.svg)](https://pyup.io/repos/github/keimlink/docker-sphinx-doc/ "Python Dependency Updates")
 [![devDependencies Status](https://david-dm.org/keimlink/docker-sphinx-doc/dev-status.svg)](https://david-dm.org/keimlink/docker-sphinx-doc?type=dev "devDependencies Status")
 [![Greenkeeper](https://badges.greenkeeper.io/keimlink/docker-sphinx-doc.svg)](https://greenkeeper.io/ "Greenkeeper")
 
