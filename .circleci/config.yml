@@ -103,21 +103,6 @@ jobs:
       - run:
           command: yarn eslint . --ext .js
           name: Check all JavaScript files
-  greenkeeper-lockfile-update:
-    <<: *docker-node
-    steps:
-      - *attach-workspace
-      - run:
-          command: yarn run greenkeeper-lockfile-update
-          name: Update yarn.lock
-      - *persist-to-workspace
-  greenkeeper-lockfile-upload:
-    <<: *docker-node
-    steps:
-      - *attach-workspace
-      - run:
-          command: yarn run greenkeeper-lockfile-upload
-          name: Upload yarn.lock
   markdownlint:
     <<: *docker-node
     steps:
@@ -203,21 +188,6 @@ workflows:
       - eslint:
           requires:
             - install
-      - greenkeeper-lockfile-update:
-          filters:
-            branches:
-              only: /^greenkeeper\/.*/
-          requires:
-            - install
-      - greenkeeper-lockfile-upload:
-          context: org-global
-          filters:
-            branches:
-              only: /^greenkeeper\/.*/
-          requires:
-            - build-latest
-            - build-latex
-            - greenkeeper-lockfile-update
       - install:
           requires:
             - checkout

@@ -1009,14 +1009,6 @@ graceful-fs@^4.0.0, graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
-greenkeeper-lockfile@1.13.0:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/greenkeeper-lockfile/-/greenkeeper-lockfile-1.13.0.tgz#ea70c6c348931b4397215816975aa148e6880809"
-  dependencies:
-    lodash "^4.17.4"
-    require-relative "^0.8.7"
-    semver "^5.3.0"
-
 gulp-exclude-gitignore@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/gulp-exclude-gitignore/-/gulp-exclude-gitignore-1.2.0.tgz#341aeb62faab428af5550da9359ceff99388f1d0"
@@ -2045,10 +2037,6 @@ require-main-filename@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/require-main-filename/-/require-main-filename-1.0.1.tgz#97f717b69d48784f5f526a6c5aa8ffdda055a4d1"
 
-require-relative@^0.8.7:
-  version "0.8.7"
-  resolved "https://registry.yarnpkg.com/require-relative/-/require-relative-0.8.7.tgz#7999539fc9e047a37928fa196f8e1563dabd36de"
-
 require-uncached@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/require-uncached/-/require-uncached-1.0.3.tgz#4e0d56d6c9662fd31e43011c4b95aa49955421d3"
@@ -2444,7 +2432,7 @@ vinyl@^2.0.0, vinyl@^2.1.0:
     remove-trailing-separator "^1.0.1"
     replace-ext "^1.0.0"
 
-"vm2@github:patriksimek/vm2#custom_files":
+vm2@patriksimek/vm2#custom_files:
   version "3.5.0"
   resolved "https://codeload.github.com/patriksimek/vm2/tar.gz/7e82f90ac705fc44fad044147cb0df09b4c79a57"
 

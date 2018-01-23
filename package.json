@@ -10,7 +10,6 @@
     "danger": "3.1.0",
     "eclint": "2.6.0",
     "eslint": "4.16.0",
-    "greenkeeper-lockfile": "1.13.0",
     "markdownlint-cli": "0.6.0"
   },
   "eslintConfig": {
