@@ -2,6 +2,19 @@
 # yarn lockfile v1
 
 
+"@octokit/rest@^14.0.4":
+  version "14.0.5"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-14.0.5.tgz#6d130aa0c0024e2e2c8a4e3a48373f70b6ba983e"
+  dependencies:
+    before-after-hook "^1.1.0"
+    debug "^3.1.0"
+    dotenv "^4.0.0"
+    https-proxy-agent "^2.1.0"
+    is-stream "^1.1.0"
+    lodash "^4.17.4"
+    proxy-from-env "^1.0.0"
+    url-template "^2.0.8"
+
 "@sindresorhus/is@^0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
@@ -184,6 +197,10 @@ babel-runtime@^6.26.0:
 balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
+
+before-after-hook@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/before-after-hook/-/before-after-hook-1.1.0.tgz#83165e15a59460d13702cb8febd6a1807896db5a"
 
 bignumber.js@^2.4.0:
   version "2.4.0"
@@ -380,7 +397,7 @@ combined-stream@~0.0.4:
   dependencies:
     delayed-stream "0.0.5"
 
-commander@*, commander@^2.11.0, commander@^2.12.2:
+commander@*, commander@^2.11.0, commander@^2.13.0:
   version "2.13.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.13.0.tgz#6964bca67685df7c1f1430c584f07d7597885b9c"
 
@@ -443,16 +460,16 @@ ctype@0.5.3:
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/ctype/-/ctype-0.5.3.tgz#82c18c2461f74114ef16c135224ad0b9144ca12f"
 
-danger@3.0.5:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/danger/-/danger-3.0.5.tgz#02d3a8b6cc3df6637da27c88326744e5c1f410ec"
+danger@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/danger/-/danger-3.1.0.tgz#91760945b641d3a17720d3fa27d3c68dac6a0656"
   dependencies:
+    "@octokit/rest" "^14.0.4"
     babel-polyfill "^6.23.0"
     chalk "^2.3.0"
-    commander "^2.12.2"
+    commander "^2.13.0"
     debug "^3.1.0"
     get-stdin "^5.0.1"
-    github "^13.0.1"
     hyperlinker "^1.0.0"
     jsome "^2.3.25"
     json5 "^0.5.1"
@@ -473,7 +490,7 @@ danger@3.0.5:
     rfc6902 "^2.2.2"
     supports-hyperlinks "^1.0.1"
     vm2 patriksimek/vm2#custom_files
-    voca "^1.3.1"
+    voca "^1.4.0"
 
 date-format@0.0.2:
   version "0.0.2"
@@ -894,18 +911,6 @@ git-config-path@^1.0.1:
     extend-shallow "^2.0.1"
     fs-exists-sync "^0.1.0"
     homedir-polyfill "^1.0.0"
-
-github@^13.0.1:
-  version "13.1.0"
-  resolved "https://registry.yarnpkg.com/github/-/github-13.1.0.tgz#fc925950beebdff0cb0583197598b86f41bedaa4"
-  dependencies:
-    debug "^3.1.0"
-    dotenv "^4.0.0"
-    https-proxy-agent "^2.1.0"
-    is-stream "^1.1.0"
-    lodash "^4.17.4"
-    proxy-from-env "^1.0.0"
-    url-template "^2.0.8"
 
 glob-parent@^3.1.0:
   version "3.1.0"
@@ -2443,7 +2448,7 @@ vinyl@^2.0.0, vinyl@^2.1.0:
   version "3.5.0"
   resolved "https://codeload.github.com/patriksimek/vm2/tar.gz/7e82f90ac705fc44fad044147cb0df09b4c79a57"
 
-voca@^1.3.1:
+voca@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/voca/-/voca-1.4.0.tgz#e15ac58b38290b72acc0c330366b6cc7984924d7"
 
