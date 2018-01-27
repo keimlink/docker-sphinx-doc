@@ -29,7 +29,7 @@ lint: ## Run lint checks
 	docker run --interactive --rm --tty --volume $$(pwd):/home/node/src node:8.9.4-alpine \
 		su - node -c 'cd src \
 			&& yarn install \
-			&& yarn eslint . --ext .js \
+			&& yarn xo \
 			&& yarn eclint check "**" "!*.swp" "!docs/**" "!yarn.lock" \
 			&& yarn markdownlint "**.md"'
 	find . $(FIND_EXCLUDE_PATHS) -name "*.sh" -exec \

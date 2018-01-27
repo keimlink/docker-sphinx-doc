@@ -9,38 +9,13 @@
   "devDependencies": {
     "danger": "3.1.3",
     "eclint": "2.6.0",
-    "eslint": "4.16.0",
-    "markdownlint-cli": "0.6.0"
+    "markdownlint-cli": "0.6.0",
+    "xo": "0.18.2"
   },
-  "eslintConfig": {
-    "env": {
-      "es6": true,
-      "node": true
-    },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-      "sourceType": "module"
-    },
-    "rules": {
-      "indent": [
-        "error",
-        4
-      ],
-      "linebreak-style": [
-        "error",
-        "unix"
-      ],
-      "quotes": [
-        "error",
-        "single"
-      ],
-      "semi": [
-        "error",
-        "always"
-      ]
-    }
+  "scripts": {
+    "test": "xo"
   },
-  "eslintIgnore": [
-    "docs/_build"
-  ]
+  "xo": {
+    "space": 4
+  }
 }

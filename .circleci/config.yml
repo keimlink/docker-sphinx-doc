@@ -96,13 +96,6 @@ jobs:
       - run:
           command: yarn eclint check  "**" "!*.swp" "!docs/**" "!yarn.lock"
           name: Validate EditorConfig settings
-  eslint:
-    <<: *docker-node
-    steps:
-      - *attach-workspace
-      - run:
-          command: yarn eslint . --ext .js
-          name: Check all JavaScript files
   markdownlint:
     <<: *docker-node
     steps:
@@ -134,6 +127,13 @@ jobs:
       - run:
           command: find . -name "*.sh" -exec shellcheck {} +
           name: Check all shell scripts
+  xo:
+    <<: *docker-node
+    steps:
+      - *attach-workspace
+      - run:
+          command: yarn xo
+          name: Check all JavaScript files
   yamllint:
     docker:
       - image: boiyaa/yamllint:1.8.1
@@ -169,23 +169,20 @@ workflows:
           requires:
             - analyze-pull-request
             - eclint
-            - eslint
             - markdownlint
             - shellcheck
+            - xo
             - yamllint
       - build-latex:
           requires:
             - analyze-pull-request
             - eclint
-            - eslint
             - markdownlint
             - shellcheck
+            - xo
             - yamllint
       - checkout
       - eclint:
-          requires:
-            - install
-      - eslint:
           requires:
             - install
       - install:
@@ -195,6 +192,9 @@ workflows:
           requires:
             - install
       - shellcheck
+      - xo:
+          requires:
+            - install
       - yamllint:
           requires:
             - checkout
