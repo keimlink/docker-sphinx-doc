@@ -24,6 +24,11 @@ clean: ## Remove all images and test artifacts
 	rm -fr docs
 	docker rmi --force $$(docker images --quiet $(IMAGE_NAME)* | uniq)
 
+.PHONY: fix
+fix: ## Run xo and fix files in-place
+	docker run --interactive --rm --tty --volume $$(pwd):/home/node/src node:8.9.4-alpine \
+		su - node -c 'cd src && yarn xo --fix'
+
 .PHONY: lint
 lint: ## Run lint checks
 	docker run --interactive --rm --tty --volume $$(pwd):/home/node/src node:8.9.4-alpine \
