@@ -1,6 +1,6 @@
 'use strict';
 
-import { danger, fail, warn } from 'danger';
+import {danger, fail, warn} from 'danger';
 
 const modifiedFiles = danger.git.modified_files;
 const pr = danger.github.pr;
