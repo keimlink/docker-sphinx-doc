@@ -13,7 +13,7 @@
     "xo": "0.18.2"
   },
   "scripts": {
-    "test": "xo"
+    "lint": "xo && eclint check '**' '!*.swp' '!docs/**' '!yarn.lock' && markdownlint '**.md'"
   },
   "xo": {
     "space": 4

@@ -89,20 +89,6 @@ jobs:
       - *attach-workspace
       - checkout
       - *persist-to-workspace
-  eclint:
-    <<: *docker-node
-    steps:
-      - *attach-workspace
-      - run:
-          command: yarn eclint check  "**" "!*.swp" "!docs/**" "!yarn.lock"
-          name: Validate EditorConfig settings
-  markdownlint:
-    <<: *docker-node
-    steps:
-      - *attach-workspace
-      - run:
-          command: yarn markdownlint "**.md"
-          name: Validate all Markdown files
   push:
     <<: *docker-defaults
     steps:
@@ -127,13 +113,6 @@ jobs:
       - run:
           command: find . -name "*.sh" -exec shellcheck {} +
           name: Check all shell scripts
-  xo:
-    <<: *docker-node
-    steps:
-      - *attach-workspace
-      - run:
-          command: yarn xo
-          name: Check all JavaScript files
   yamllint:
     docker:
       - image: boiyaa/yamllint:1.8.1
@@ -150,6 +129,13 @@ jobs:
       - run:
           command: yarn check
           name: Check yarn.lock
+  yarn-lint:
+    <<: *docker-node
+    steps:
+      - *attach-workspace
+      - run:
+          command: yarn lint
+          name: Run all yarn lint checks
 
 version: 2
 
@@ -168,33 +154,20 @@ workflows:
       - build-latest:
           requires:
             - analyze-pull-request
-            - eclint
-            - markdownlint
             - shellcheck
-            - xo
             - yamllint
+            - yarn-lint
       - build-latex:
           requires:
             - analyze-pull-request
-            - eclint
-            - markdownlint
             - shellcheck
-            - xo
             - yamllint
+            - yarn-lint
       - checkout
-      - eclint:
-          requires:
-            - install
       - install:
           requires:
             - checkout
-      - markdownlint:
-          requires:
-            - install
       - shellcheck
-      - xo:
-          requires:
-            - install
       - yamllint:
           requires:
             - checkout
@@ -207,6 +180,9 @@ workflows:
             - build-latest
             - build-latex
       - yarn-check:
+          requires:
+            - install
+      - yarn-lint:
           requires:
             - install
   version: 2
