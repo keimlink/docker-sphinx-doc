@@ -6,6 +6,7 @@
 [![Python Dependency Updates](https://pyup.io/repos/github/keimlink/docker-sphinx-doc/shield.svg)](https://pyup.io/repos/github/keimlink/docker-sphinx-doc/ "Python Dependency Updates")
 [![devDependencies Status](https://david-dm.org/keimlink/docker-sphinx-doc/dev-status.svg)](https://david-dm.org/keimlink/docker-sphinx-doc?type=dev "devDependencies Status")
 [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovateapp.com/ "Renovate enabled")
+[![License](https://img.shields.io/github/license/keimlink/docker-sphinx-doc.svg)](https://github.com/keimlink/docker-sphinx-doc/blob/develop/LICENSE "License")
 
 A Docker image for [Sphinx](http://www.sphinx-doc.org/), a documentation tool written in Python.
 
