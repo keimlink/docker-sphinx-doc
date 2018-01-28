@@ -1,15 +1,8 @@
 {
-  "assignees": [
-    "keimlink"
-  ],
+  "assignees": ["keimlink"],
   "devDependencies": {
     "automerge": true
   },
-  "extends": [
-    "config:base",
-    "default:pinDigestsDisabled"
-  ],
-  "labels": [
-    "renovate"
-  ]
+  "extends": ["config:base", "default:pinDigestsDisabled"],
+  "labels": ["renovate"]
 }
