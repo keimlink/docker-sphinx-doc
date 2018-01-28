@@ -19,5 +19,8 @@
   "xo": {
     "prettier": true,
     "space": 4
+  },
+  "prettier": {
+    "printWidth": 99
   }
 }
