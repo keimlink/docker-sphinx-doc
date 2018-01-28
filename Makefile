@@ -37,6 +37,11 @@ lint: ## Run lint checks
 		docker run --interactive --rm --tty --volume $$(pwd):/mnt koalaman/shellcheck-alpine:v0.4.7 {} +
 	docker run --interactive --rm --tty --volume $$(pwd):/workdir boiyaa/yamllint:1.8.1 --strict .yamllint .
 
+.PHONY: prettier
+prettier: ## Rewrite all files that are different from Prettier formatting
+	docker run --interactive --rm --tty --volume $$(pwd):/home/node/src node:8.9.4-alpine \
+		su - node -c 'cd src && yarn prettier --write "**.{json,md}"'
+
 .PHONY: node
 node: ## Run node container
 	docker run --interactive --rm --tty --volume $$(pwd):/home/node/src node:8.9.4-alpine su - node
