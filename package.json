@@ -14,7 +14,8 @@
     "xo": "0.18.2"
   },
   "scripts": {
-    "lint": "xo && eclint check '**' '!*.swp' '!docs/**' '!yarn.lock' && markdownlint '**.md'"
+    "lint":
+      "xo && eclint check '**' '!*.swp' '!docs/**' '!yarn.lock' && markdownlint '**.md' && prettier --list-different '**.{json,md}'"
   },
   "xo": {
     "prettier": true,
