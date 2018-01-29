@@ -40,7 +40,7 @@ lint: ## Run lint checks
 .PHONY: prettier
 prettier: ## Rewrite all files that are different from Prettier formatting
 	docker run --interactive --rm --tty --volume $$(pwd):/home/node/src node:8.9.4-alpine \
-		su - node -c 'cd src && yarn prettier --write "**.{json,md}"'
+		su - node -c 'cd src && yarn prettier-write'
 
 .PHONY: node
 node: ## Run node container
