@@ -11,11 +11,12 @@
     "eclint": "2.6.0",
     "markdownlint-cli": "0.6.0",
     "prettier": "1.10.2",
+    "prettier-check": "2.0.0",
     "xo": "0.18.2"
   },
   "scripts": {
     "lint":
-      "xo && eclint check '**' '!*.swp' '!docs/**' '!yarn.lock' && markdownlint '*.md' && prettier --list-different '*.{json,md}'",
+      "xo && eclint check '**' '!*.swp' '!docs/**' '!yarn.lock' && markdownlint '*.md' && prettier-check '*.{json,md}'",
     "prettier-write": "prettier --write '*.{json,md}'"
   },
   "xo": {
