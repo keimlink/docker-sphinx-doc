@@ -1,0 +1,6 @@
+# Configuration for request-info - https://github.com/behaviorbot/request-info
+
+# Comment to reply with.
+requestInfoReplyComment: >
+  This issue or pull request has no description so far. Please provide more
+  details about what you're trying to accomplish here.
