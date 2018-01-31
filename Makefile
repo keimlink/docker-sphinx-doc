@@ -26,25 +26,28 @@ clean: ## Remove all images and test artifacts
 
 .PHONY: fix
 fix: ## Run xo and fix files in-place
-	docker run --interactive --rm --tty --volume $$(pwd):/home/node/src node:8.9.4-alpine \
-		su - node -c 'cd src && yarn xo --fix'
+	docker run --interactive --name $(IMAGE_NAME)_fix --rm --tty --volume $$(pwd):/home/node/src \
+		node:8.9.4-alpine su - node -c 'cd src && yarn xo --fix'
 
 .PHONY: lint
 lint: ## Run lint checks
-	docker run --interactive --rm --tty --volume $$(pwd):/home/node/src node:8.9.4-alpine \
-		su - node -c 'cd src && yarn install && yarn lint'
+	docker run --interactive --name $(IMAGE_NAME)_lint --rm --tty --volume $$(pwd):/home/node/src \
+		node:8.9.4-alpine su - node -c 'cd src && yarn install && yarn lint'
 	find . $(FIND_EXCLUDE_PATHS) -name "*.sh" -exec \
-		docker run --interactive --rm --tty --volume $$(pwd):/mnt koalaman/shellcheck-alpine:v0.4.7 {} +
-	docker run --interactive --rm --tty --volume $$(pwd):/workdir boiyaa/yamllint:1.8.1 --strict .yamllint .
+		docker run --interactive --name $(IMAGE_NAME)_shellcheck --rm --tty --volume $$(pwd):/mnt \
+			koalaman/shellcheck-alpine:v0.4.7 {} +
+	docker run --interactive --name $(IMAGE_NAME)_yamllint --rm --tty --volume $$(pwd):/workdir \
+		boiyaa/yamllint:1.8.1 --strict .yamllint .
 
 .PHONY: prettier
 prettier: ## Rewrite all files that are different from Prettier formatting
-	docker run --interactive --rm --tty --volume $$(pwd):/home/node/src node:8.9.4-alpine \
-		su - node -c 'cd src && yarn prettier-write'
+	docker run --interactive --name $(IMAGE_NAME)_prettier --rm --tty --volume $$(pwd):/home/node/src \
+		node:8.9.4-alpine su - node -c 'cd src && yarn prettier-write'
 
 .PHONY: node
 node: ## Run node container
-	docker run --interactive --rm --tty --volume $$(pwd):/home/node/src node:8.9.4-alpine su - node
+	docker run --interactive --name $(IMAGE_NAME)_node --rm --tty --volume $$(pwd):/home/node/src \
+		node:8.9.4-alpine su - node
 
 .PHONY: smoke-test-latest
 smoke-test-latest: ## Run smoke tests for latest image

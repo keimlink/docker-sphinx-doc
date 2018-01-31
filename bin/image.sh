@@ -71,7 +71,7 @@ image_test_cmd()
 {
     rm -fr docs
     cmd="sphinx-quickstart --author=me --project=smoke-test --quiet docs && $1"
-    docker run --interactive --tty "${IMAGE}:${TAG}" sh -c "${cmd}"
+    docker run --interactive --name ${IMAGE}_test --tty "${IMAGE}:${TAG}" sh -c "${cmd}"
     container=$(docker ps --all --filter ancestor="${IMAGE}:${TAG}" --format "{{.Names}}")
     docker cp "${container}:/home/python/docs" "$(pwd)"
     docker rm "${container}"
