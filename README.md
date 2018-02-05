@@ -12,8 +12,8 @@ A Docker image for [Sphinx](http://www.sphinx-doc.org/), a documentation tool wr
 
 ## Supported tags and respective `Dockerfile` links
 
-* `1.6.6`, `latest` ([Dockerfile](https://github.com/keimlink/docker-sphinx-doc/blob/master/Dockerfile)) [![Image download size and number of layers](https://images.microbadger.com/badges/image/keimlink/sphinx-doc.svg)](https://microbadger.com/images/keimlink/sphinx-doc "Image download size and number of layers")
-* `1.6.6-latex`, `latex` ([Dockerfile.latex](https://github.com/keimlink/docker-sphinx-doc/blob/master/Dockerfile.latex)) [![Image download size and number of layers](https://images.microbadger.com/badges/image/keimlink/sphinx-doc:latex.svg)](https://microbadger.com/images/keimlink/sphinx-doc:latex "Image download size and number of layers")
+* `1.6.7`, `latest` ([Dockerfile](https://github.com/keimlink/docker-sphinx-doc/blob/master/Dockerfile)) [![Image download size and number of layers](https://images.microbadger.com/badges/image/keimlink/sphinx-doc.svg)](https://microbadger.com/images/keimlink/sphinx-doc "Image download size and number of layers")
+* `1.6.7-latex`, `latex` ([Dockerfile.latex](https://github.com/keimlink/docker-sphinx-doc/blob/master/Dockerfile.latex)) [![Image download size and number of layers](https://images.microbadger.com/badges/image/keimlink/sphinx-doc:latex.svg)](https://microbadger.com/images/keimlink/sphinx-doc:latex "Image download size and number of layers")
 
 ## What is Sphinx?
 
@@ -26,13 +26,13 @@ A Docker image for [Sphinx](http://www.sphinx-doc.org/), a documentation tool wr
 First run `sphinx-quickstart` to set up a source directory and a configuration:
 
 ```console
-docker run -it --rm -v "$(pwd)/docs":/home/python/docs keimlink/sphinx-doc:1.6.6 sphinx-quickstart docs
+docker run -it --rm -v "$(pwd)/docs":/home/python/docs keimlink/sphinx-doc:1.6.7 sphinx-quickstart docs
 ```
 
 Then build the HTML documentation:
 
 ```console
-docker run -it --rm -v "$(pwd)/docs":/home/python/docs keimlink/sphinx-doc:1.6.6 make -C docs html
+docker run -it --rm -v "$(pwd)/docs":/home/python/docs keimlink/sphinx-doc:1.6.7 make -C docs html
 ```
 
 ### Create a `Dockerfile` for your Sphinx project
@@ -48,7 +48,7 @@ sphinx-autobuild==0.7.1
 Then create the `Dockerfile`:
 
 ```dockerfile
-FROM keimlink/sphinx-doc:1.6.6
+FROM keimlink/sphinx-doc:1.6.7
 
 COPY requirements.pip ./
 
