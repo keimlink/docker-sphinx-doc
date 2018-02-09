@@ -47,15 +47,16 @@ jobs:
             - v1-node-{{ .Branch }}-{{ checksum "yarn.lock" }}
             - v1-node-{{ .Branch }}-
             - v1-node-
-          name: Restore node_modules cache
+          name: Restore node_modules and yarn cache
       - run:
           command: yarn install --frozen-lockfile
           name: Install dependencies
       - save_cache:
           key: v1-node-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          name: Save node_modules cache
+          name: Save node_modules and yarn cache
           paths:
             - node_modules
+            - ~/.cache/yarn
       - *persist-to-workspace
   build-latest:
     <<: *docker-defaults
