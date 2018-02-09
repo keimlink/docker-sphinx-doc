@@ -3,6 +3,6 @@
   "devDependencies": {
     "automerge": true
   },
-  "extends": ["config:base", "default:pinDigestsDisabled"],
+  "extends": ["config:base"],
   "labels": ["renovate"]
 }
