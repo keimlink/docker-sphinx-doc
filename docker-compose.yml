@@ -1,0 +1,17 @@
+services:
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    volumes:
+      - .:/home/node/src
+  shellcheck:
+    image: koalaman/shellcheck-alpine:v0.4.7
+    volumes:
+      - .:/mnt
+  yamllint:
+    command: ["--strict", ".yamllint", "."]
+    image: boiyaa/yamllint:1.8.1
+    volumes:
+      - .:/workdir
+version: '3'

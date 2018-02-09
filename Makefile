@@ -26,28 +26,21 @@ clean: ## Remove all images and test artifacts
 
 .PHONY: fix
 fix: ## Run xo and fix files in-place
-	docker run --interactive --name sphinx-doc_fix --rm --tty --volume $$(pwd):/home/node/src \
-		node:8.9.4-alpine su - node -c 'cd src && yarn xo --fix'
+	docker-compose run --rm node yarn xo --fix
 
 .PHONY: lint
 lint: ## Run lint checks
-	docker run --interactive --name sphinx-doc_lint --rm --tty --volume $$(pwd):/home/node/src \
-		node:8.9.4-alpine su - node -c 'cd src && yarn install && yarn lint'
-	find . $(FIND_EXCLUDE_PATHS) -name "*.sh" -exec \
-		docker run --interactive --name sphinx-doc_shellcheck --rm --tty --volume $$(pwd):/mnt \
-			koalaman/shellcheck-alpine:v0.4.7 {} +
-	docker run --interactive --name sphinx-doc_yamllint --rm --tty --volume $$(pwd):/workdir \
-		boiyaa/yamllint:1.8.1 --strict .yamllint .
+	docker-compose run --rm node yarn lint
+	find . $(FIND_EXCLUDE_PATHS) -name "*.sh" -exec docker-compose run --rm shellcheck {} +
+	docker-compose run --rm yamllint
 
 .PHONY: prettier
 prettier: ## Rewrite all files that are different from Prettier formatting
-	docker run --interactive --name sphinx-doc_prettier --rm --tty --volume $$(pwd):/home/node/src \
-		node:8.9.4-alpine su - node -c 'cd src && yarn prettier-write'
+	docker-compose run --rm node yarn prettier-write
 
-.PHONY: node
-node: ## Run node container
-	docker run --interactive --name sphinx-doc_node --rm --tty --volume $$(pwd):/home/node/src \
-		node:8.9.4-alpine su - node
+.PHONY: shell
+shell: ## Run a shell in the node container
+	docker-compose run --rm node sh
 
 .PHONY: smoke-test-latest
 smoke-test-latest: ## Run smoke tests for latest image
