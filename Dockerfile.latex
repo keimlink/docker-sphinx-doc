@@ -1,4 +1,4 @@
-FROM python:3.6.4
+FROM python:3.6.4@sha256:e4af4ab2a5a85e041fec46424083254b6852b1b41b806163eaa6822841f4f19e
 
 RUN echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/backports.list \
     && apt-get update \
