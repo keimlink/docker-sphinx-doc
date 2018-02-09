@@ -11,7 +11,7 @@ WORKDIR /home/python
 RUN mkdir docs && chown python: docs
 
 COPY bin/docker-entrypoint.sh /usr/local/bin/
-COPY requirements.pip ./
+COPY --chown=1001:1001 requirements.pip ./
 
 ENV PIP_DISABLE_PIP_VERSION_CHECK True
 ENV PIP_NO_CACHE_DIR False
