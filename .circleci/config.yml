@@ -1,32 +1,23 @@
 aliases:
-  _working-directory: &working-directory
-    working_directory: ~/project/docker-sphinx-doc
   attach-workspace: &attach-workspace
     attach_workspace:
       at: ~/project
   docker-defaults: &docker-defaults
     docker:
       - image: docker:17.09.1-ce-git
-    <<: *working-directory
   docker-node: &docker-node
     docker:
       - image: circleci/node:8
-    <<: *working-directory
-  persist-to-workspace: &persist-to-workspace
-    persist_to_workspace:
-      root: ~/project
-      paths:
-        - docker-sphinx-doc
   persist-docker-images: &persist-docker-images
     persist_to_workspace:
-      root: ~/project
-      paths:
-        - docker-sphinx-doc/docker-images
+      root: .
+      paths: docker-images
 
 jobs:
   analyze-pull-request:
     <<: *docker-node
     steps:
+      - checkout
       - *attach-workspace
       - run:
           command: |
@@ -41,6 +32,7 @@ jobs:
   install:
     <<: *docker-node
     steps:
+      - checkout
       - *attach-workspace
       - restore_cache:
           keys:
@@ -57,10 +49,13 @@ jobs:
           paths:
             - node_modules
             - ~/.cache/yarn
-      - *persist-to-workspace
+      - persist_to_workspace:
+          root: .
+          paths: node_modules
   build-latest:
     <<: *docker-defaults
     steps:
+      - checkout
       - *attach-workspace
       - setup_remote_docker
       - run:
@@ -74,6 +69,7 @@ jobs:
   build-latex:
     <<: *docker-defaults
     steps:
+      - checkout
       - *attach-workspace
       - setup_remote_docker
       - run:
@@ -84,16 +80,11 @@ jobs:
             ./bin/image.sh save keimlink/sphinx-doc latex > docker-images/sphinx-doc_latex.tar
           name: Build and test latex Docker image
       - *persist-docker-images
-  checkout:
-    <<: *docker-defaults
-    steps:
-      - *attach-workspace
-      - checkout
-      - *persist-to-workspace
   push:
     <<: *docker-defaults
     steps:
       - setup_remote_docker
+      - checkout
       - *attach-workspace
       - run:
           command: |
@@ -106,10 +97,7 @@ jobs:
   shellcheck:
     docker:
       - image: koalaman/shellcheck-alpine:v0.4.7
-    <<: *working-directory
     steps:
-      # ca-certificates package is not installed in shellcheck container.
-      # Without this package attach_workspace will fail.
       - checkout
       - run:
           command: find . -name "*.sh" -exec shellcheck {} +
@@ -117,15 +105,15 @@ jobs:
   yamllint:
     docker:
       - image: boiyaa/yamllint:1.8.1
-    <<: *working-directory
     steps:
-      - *attach-workspace
+      - checkout
       - run:
           command: yamllint --strict .yamllint .
           name: Check all YAML files
   yarn-check:
     <<: *docker-node
     steps:
+      - checkout
       - *attach-workspace
       - run:
           command: yarn check
@@ -133,6 +121,7 @@ jobs:
   yarn-lint:
     <<: *docker-node
     steps:
+      - checkout
       - *attach-workspace
       - run:
           command: yarn lint
@@ -164,14 +153,9 @@ workflows:
             - shellcheck
             - yamllint
             - yarn-lint
-      - checkout
-      - install:
-          requires:
-            - checkout
+      - install
       - shellcheck
-      - yamllint:
-          requires:
-            - checkout
+      - yamllint
       - push:
           context: org-global
           filters:
