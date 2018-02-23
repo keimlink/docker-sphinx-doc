@@ -15,6 +15,7 @@
     "xo": "0.18.2"
   },
   "scripts": {
+    "ci": "rm -fr node_modules && yarn install --frozen-lockfile",
     "lint":
       "xo && eclint check '**' '!*.swp' '!docs/**' '!yarn.lock' && markdownlint '*.md' && prettier-check '*.{json,md}'",
     "prettier-write": "prettier --write '*.{json,md}'"
