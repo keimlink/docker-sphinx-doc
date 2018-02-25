@@ -9,22 +9,22 @@ RUN echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sou
         texlive-latex-extra \
     && rm --force --recursive /var/lib/apt/lists/*
 
-RUN groupadd --gid 1001 python
+RUN groupadd --gid 1000 python
 
-RUN useradd --create-home --gid python --uid 1001 python
+RUN useradd --create-home --gid python --uid 1000 python
 
 WORKDIR /home/python
 
 RUN mkdir docs && chown python: docs
 
 COPY bin/docker-entrypoint.sh /usr/local/bin/
-COPY --chown=1001:1001 requirements.pip ./
+COPY --chown=1000:1000 requirements.pip ./
 
 ENV PIP_DISABLE_PIP_VERSION_CHECK True
 ENV PIP_NO_CACHE_DIR False
 ENV PYTHONUNBUFFERED True
 
-USER 1001
+USER 1000
 
 RUN python -m venv .venv \
     && . .venv/bin/activate \

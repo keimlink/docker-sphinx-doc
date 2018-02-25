@@ -50,7 +50,7 @@ Then create the `Dockerfile`:
 ```dockerfile
 FROM keimlink/sphinx-doc:1.7.1
 
-COPY --chown=1001:1001 requirements.pip ./
+COPY --chown=1000:1000 requirements.pip ./
 
 RUN . .venv/bin/activate \
     && python -m pip install --requirement requirements.pip

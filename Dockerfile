@@ -2,22 +2,22 @@ FROM python:3.6.4-alpine3.7@sha256:e4af4ab2a5a85e041fec46424083254b6852b1b41b806
 
 RUN apk add --no-cache enchant make
 
-RUN addgroup -g 1001 python
+RUN addgroup -g 1000 python
 
-RUN adduser -D -G python -u 1001 python
+RUN adduser -D -G python -u 1000 python
 
 WORKDIR /home/python
 
 RUN mkdir docs && chown python: docs
 
 COPY bin/docker-entrypoint.sh /usr/local/bin/
-COPY --chown=1001:1001 requirements.pip ./
+COPY --chown=1000:1000 requirements.pip ./
 
 ENV PIP_DISABLE_PIP_VERSION_CHECK True
 ENV PIP_NO_CACHE_DIR False
 ENV PYTHONUNBUFFERED True
 
-USER 1001
+USER 1000
 
 RUN python -m venv .venv \
     && . .venv/bin/activate \
