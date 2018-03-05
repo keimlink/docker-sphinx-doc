@@ -12,8 +12,8 @@ A Docker image for [Sphinx](http://www.sphinx-doc.org/), a documentation tool wr
 
 ## Supported tags and respective `Dockerfile` links
 
-* `1.7.1`, `latest` ([Dockerfile](https://github.com/keimlink/docker-sphinx-doc/blob/master/Dockerfile)) [![Image download size and number of layers](https://images.microbadger.com/badges/image/keimlink/sphinx-doc.svg)](https://microbadger.com/images/keimlink/sphinx-doc "Image download size and number of layers")
-* `1.7.1-latex`, `latex` ([Dockerfile.latex](https://github.com/keimlink/docker-sphinx-doc/blob/master/Dockerfile.latex)) [![Image download size and number of layers](https://images.microbadger.com/badges/image/keimlink/sphinx-doc:latex.svg)](https://microbadger.com/images/keimlink/sphinx-doc:latex "Image download size and number of layers")
+*   `1.7.1`, `latest` ([Dockerfile](https://github.com/keimlink/docker-sphinx-doc/blob/master/Dockerfile)) [![Image download size and number of layers](https://images.microbadger.com/badges/image/keimlink/sphinx-doc.svg)](https://microbadger.com/images/keimlink/sphinx-doc "Image download size and number of layers")
+*   `1.7.1-latex`, `latex` ([Dockerfile.latex](https://github.com/keimlink/docker-sphinx-doc/blob/master/Dockerfile.latex)) [![Image download size and number of layers](https://images.microbadger.com/badges/image/keimlink/sphinx-doc:latex.svg)](https://microbadger.com/images/keimlink/sphinx-doc:latex "Image download size and number of layers")
 
 ## What is Sphinx?
 
