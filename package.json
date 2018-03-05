@@ -25,6 +25,14 @@
     "space": 4
   },
   "prettier": {
+    "overrides": [
+      {
+        "files": "*.md",
+        "options": {
+          "tabWidth": 4
+        }
+      }
+    ],
     "printWidth": 99
   }
 }
