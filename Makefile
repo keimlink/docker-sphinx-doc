@@ -38,6 +38,10 @@ lint: ## Run lint checks
 prettier: ## Rewrite all files that are different from Prettier formatting
 	docker-compose run --rm node yarn prettier-write
 
+.PHONY: release
+release: ## Pull develop and master, merge develop into master, tag and push release
+	@./bin/image.sh release
+
 .PHONY: shell
 shell: ## Run a shell in the node container
 	docker-compose run --rm node sh

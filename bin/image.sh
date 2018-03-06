@@ -21,6 +21,7 @@ readonly USAGE="Usage: $(basename "$0") [COMMAND] [IMAGE] [TAG]
     Available commands:
         build
         push
+        release
         save
         test
 "
@@ -87,11 +88,29 @@ image_test()
     fi
 }
 
+image_release()
+{
+    echo "Are you sure you want to release version $VERSION? [y/N]"
+    read -r ANSWER
+    if echo "$ANSWER" | grep -iq "^y"; then
+        git diff --cached --quiet
+        git checkout develop
+        git pull --ff-only
+        git checkout master
+        git pull --ff-only
+        git merge develop
+        git tag "$VERSION"
+        git push
+        git push --tags
+    fi
+}
+
 main()
 {
     case "${COMMAND}" in
         build) image_build ;;
         push) image_push ;;
+        release) image_release ;;
         save) image_save ;;
         test) image_test ;;
         *) echo "${USAGE}" && exit 1 ;;
