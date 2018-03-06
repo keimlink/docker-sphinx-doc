@@ -21,7 +21,6 @@
     "prettier-write": "prettier --write '*.{json,md}'"
   },
   "xo": {
-    "prettier": true,
     "space": 4
   },
   "prettier": {
