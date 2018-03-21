@@ -655,9 +655,9 @@ currently-unhandled@^0.4.1:
   dependencies:
     array-find-index "^1.0.1"
 
-danger@3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/danger/-/danger-3.3.0.tgz#5bcd9e530d9ec14f7e02fbd37a3800cc8554831f"
+danger@3.3.2:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/danger/-/danger-3.3.2.tgz#f4eaaaa8a37ee8c3327ce89757edd6487a335296"
   dependencies:
     "@octokit/rest" "^14.0.4"
     babel-polyfill "^6.23.0"
