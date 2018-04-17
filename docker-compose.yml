@@ -6,12 +6,12 @@ services:
     volumes:
       - .:/home/node/src
   shellcheck:
-    image: koalaman/shellcheck-alpine:v0.4.7
+    image: koalaman/shellcheck-alpine:v0.4.7@sha256:0fc9ebc74a9b608f560053f03ab99b93b88f438b7b47da2907a2c84dab711c1d
     volumes:
       - .:/mnt
   yamllint:
     command: ["--strict", ".yamllint", "."]
-    image: boiyaa/yamllint:1.8.1
+    image: boiyaa/yamllint:1.8.1@sha256:f4a5d9daaf91825fa1ed8c7cd9b694217a471a23664877aca5afc67e7ca60341
     volumes:
       - .:/workdir
 version: '3'
