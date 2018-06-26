@@ -4,10 +4,10 @@ aliases:
       at: ~/project
   docker-defaults: &docker-defaults
     docker:
-      - image: docker:17.09.1-ce-git
+      - image: docker:17.09.1-ce-git@sha256:41cf96b9b5f765d28d80e444ad711cbd0b15e1a78f5b03c8c0f47149a45a82f0
   docker-node: &docker-node
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:8@sha256:ae38dddb3b442bc1c867fc0bdfaff2eb242dff95e13f8f3202a934e0e5132fbf
   persist-docker-images: &persist-docker-images
     persist_to_workspace:
       root: .
@@ -95,7 +95,7 @@ jobs:
           name: Push Docker images to registry
   shellcheck:
     docker:
-      - image: koalaman/shellcheck-alpine:v0.4.7
+      - image: koalaman/shellcheck-alpine:v0.4.7@sha256:0fc9ebc74a9b608f560053f03ab99b93b88f438b7b47da2907a2c84dab711c1d
     steps:
       - checkout
       - run:
@@ -103,7 +103,7 @@ jobs:
           name: Check all shell scripts
   yamllint:
     docker:
-      - image: boiyaa/yamllint:1.8.1
+      - image: boiyaa/yamllint:1.8.1@sha256:f4a5d9daaf91825fa1ed8c7cd9b694217a471a23664877aca5afc67e7ca60341
     steps:
       - checkout
       - run:
