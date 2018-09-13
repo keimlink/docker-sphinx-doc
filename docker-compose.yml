@@ -6,7 +6,7 @@ services:
     volumes:
       - .:/home/node/src
   shellcheck:
-    image: koalaman/shellcheck-alpine:v0.4.7
+    image: koalaman/shellcheck-alpine:v0.5.0
     volumes:
       - .:/mnt
   yamllint:
