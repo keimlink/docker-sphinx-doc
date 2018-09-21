@@ -29,7 +29,7 @@ jobs:
               exit 1
             fi
           name: Analyze Pull Request
-  install:
+  yarn-install:
     <<: *docker-node
     steps:
       - checkout
@@ -142,20 +142,18 @@ workflows:
                 - develop
                 - master
           requires:
-            - install
+            - yarn-check
       - build-latest:
           requires:
-            - analyze-pull-request
             - shellcheck
             - yamllint
             - yarn-lint
       - build-latex:
           requires:
-            - analyze-pull-request
             - shellcheck
             - yamllint
             - yarn-lint
-      - install
+      - yarn-install
       - shellcheck
       - yamllint
       - push:
@@ -168,8 +166,8 @@ workflows:
             - build-latex
       - yarn-check:
           requires:
-            - install
+            - yarn-install
       - yarn-lint:
           requires:
-            - install
+            - yarn-check
   version: 2
