@@ -99,7 +99,10 @@ jobs:
     steps:
       - checkout
       - run:
-          command: find . -name "*.sh" -exec shellcheck {} +
+          command: apk update && apk add make
+          name: Install GNU make
+      - run:
+          command: make shellcheck SHELLCHECK=shellcheck
           name: Check all shell scripts
   yamllint:
     docker:

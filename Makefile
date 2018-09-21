@@ -1,5 +1,6 @@
 FIND_EXCLUDE_PATHS ?= -not -path './.*/*' -not -path './node_modules/*'
 IMAGE_NAME ?= sphinx-doc
+SHELLCHECK ?= docker-compose run --rm shellcheck
 
 .DEFAULT_GOAL := help
 
@@ -28,10 +29,13 @@ clean: ## Remove all images and test artifacts
 fix: ## Run xo and fix files in-place
 	docker-compose run --rm node yarn xo --fix
 
+.PHONY: shellcheck
+shellcheck: ## Run shellcheck
+	find . $(FIND_EXCLUDE_PATHS) -name "*.sh" -exec $(SHELLCHECK) {} +
+
 .PHONY: lint
-lint: ## Run lint checks
+lint: shellcheck ## Run lint checks
 	docker-compose run --rm node yarn lint
-	find . $(FIND_EXCLUDE_PATHS) -name "*.sh" -exec docker-compose run --rm shellcheck {} +
 	docker-compose run --rm yamllint
 
 .PHONY: prettier
