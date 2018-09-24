@@ -1,6 +1,6 @@
 FIND_EXCLUDE_PATHS ?= -not -path './.*/*' -not -path './node_modules/*'
 IMAGE_NAME ?= sphinx-doc
-SHELL := /bin/bash -e -o pipefail
+SHELL ?= /bin/bash -e -o pipefail
 SHELLCHECK ?= docker-compose run --rm shellcheck
 
 .DEFAULT_GOAL := help
