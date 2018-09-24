@@ -3,6 +3,6 @@
   "devDependencies": {
     "automerge": true
   },
-  "extends": ["config:base", "preview:dockerCompose"],
+  "extends": ["config:base"],
   "labels": ["renovate"]
 }
