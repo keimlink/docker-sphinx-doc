@@ -1,6 +1,6 @@
 FROM python:3.6.4-alpine3.7@sha256:10bd7a59cfac2a784bedd1e6d89887995559f00b61f005a101845ed736bed779
 
-RUN apk add --no-cache enchant make
+RUN apk add --no-cache enchant=1.6.0-r12 make=4.2.1-r0
 
 RUN addgroup -g 1000 python
 

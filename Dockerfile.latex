@@ -3,10 +3,10 @@ FROM python:3.6.4
 RUN echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/backports.list \
     && apt-get update \
     && apt-get install --no-install-recommends --target-release jessie-backports --yes \
-        enchant \
-        latexmk \
-        texlive-fonts-recommended \
-        texlive-latex-extra \
+        enchant=1.6.0-10.1 \
+        latexmk=1:4.39-1 \
+        texlive-fonts-recommended=2014.20141024-2+deb8u1 \
+        texlive-latex-extra=2014.20141024-1 \
     && rm --force --recursive /var/lib/apt/lists/*
 
 RUN groupadd --gid 1000 python
