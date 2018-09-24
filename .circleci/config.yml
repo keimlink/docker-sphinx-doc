@@ -2,9 +2,9 @@ aliases:
   attach-workspace: &attach-workspace
     attach_workspace:
       at: ~/project
-  docker-defaults: &docker-defaults
+  docker-buildpack-deps: &docker-buildpack-deps
     docker:
-      - image: docker:17.09.1-ce-git
+      - image: circleci/buildpack-deps:stretch
   docker-node: &docker-node
     docker:
       - image: circleci/node:8
@@ -52,7 +52,7 @@ jobs:
           root: .
           paths: node_modules
   build-latest:
-    <<: *docker-defaults
+    <<: *docker-buildpack-deps
     environment:
       IMAGE_NAME: keimlink/sphinx-doc
     steps:
@@ -61,14 +61,13 @@ jobs:
       - setup_remote_docker
       - run:
           command: |
-            ./bin/image.sh build ${IMAGE_NAME} latest
-            ./bin/image.sh test ${IMAGE_NAME} latest
+            make build-latest smoke-test-latest
             mkdir -p docker-images
             ./bin/image.sh save ${IMAGE_NAME} latest > docker-images/sphinx-doc_latest.tar
           name: Build and test latest Docker image
       - *persist-docker-images
   build-latex:
-    <<: *docker-defaults
+    <<: *docker-buildpack-deps
     environment:
       IMAGE_NAME: keimlink/sphinx-doc
     steps:
@@ -77,14 +76,13 @@ jobs:
       - setup_remote_docker
       - run:
           command: |
-            ./bin/image.sh build ${IMAGE_NAME} latex
-            ./bin/image.sh test ${IMAGE_NAME} latex
+            make build-latex smoke-test-latex
             mkdir -p docker-images
             ./bin/image.sh save ${IMAGE_NAME} latex > docker-images/sphinx-doc_latex.tar
           name: Build and test latex Docker image
       - *persist-docker-images
   push:
-    <<: *docker-defaults
+    <<: *docker-buildpack-deps
     environment:
       IMAGE_NAME: keimlink/sphinx-doc
     steps:
