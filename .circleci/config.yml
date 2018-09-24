@@ -83,6 +83,16 @@ jobs:
             ./bin/image.sh save ${IMAGE_NAME} latex > docker-images/sphinx-doc_latex.tar
           name: Build and test latex Docker image
       - *persist-docker-images
+  hadolint:
+    docker:
+      - image: hadolint/hadolint:v1.13.0-debian@sha256:9a8253cd741f22ad2c4e086dc4809dee17ce4fc38fa64f0c6d5ed6b0b827f1fd
+    steps:
+      - checkout
+      - run:
+          command: apt-get update && apt-get install --no-install-recommends --yes make=4.1-9.1
+      - run:
+          command: make hadolint HADOLINT=hadolint
+          name: Check Dockerfiles
   push:
     <<: *docker-defaults
     environment:
@@ -151,14 +161,17 @@ workflows:
             - yarn-check
       - build-latest:
           requires:
+            - hadolint
             - shellcheck
             - yamllint
             - yarn-lint
       - build-latex:
           requires:
+            - hadolint
             - shellcheck
             - yamllint
             - yarn-lint
+      - hadolint
       - yarn-install
       - shellcheck
       - yamllint

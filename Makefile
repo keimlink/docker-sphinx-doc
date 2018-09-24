@@ -1,4 +1,5 @@
 FIND_EXCLUDE_PATHS ?= -not -path './.*/*' -not -path './node_modules/*'
+HADOLINT ?= docker-compose run --rm hadolint
 IMAGE_NAME ?= sphinx-doc
 SHELL := /bin/bash -e -o pipefail
 SHELLCHECK ?= docker-compose run --rm shellcheck
@@ -29,6 +30,12 @@ clean: ## Remove all images and test artifacts
 .PHONY: fix
 fix: ## Run xo and fix files in-place
 	docker-compose run --rm node yarn xo --fix
+
+.PHONY: hadolint
+hadolint: ## Run Dockerfile lint checks
+	@for f in $$(find . $(FIND_EXCLUDE_PATHS) -name "Dockerfile*"); do \
+		echo $$f && $(HADOLINT) < $$f; \
+	done
 
 .PHONY: shellcheck
 shellcheck: ## Run shell lint checks

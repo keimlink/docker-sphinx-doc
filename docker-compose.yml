@@ -1,4 +1,6 @@
 services:
+  hadolint:
+    image: hadolint/hadolint:v1.13.0-debian@sha256:de7fda8f56488de4b3eff4809cb63a1053cce67670783d53292f52493c39897c
   node:
     build:
       context: .

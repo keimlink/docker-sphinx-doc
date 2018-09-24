@@ -19,6 +19,7 @@ ENV PYTHONUNBUFFERED True
 
 USER 1000
 
+# hadolint ignore=SC1091
 RUN python -m venv .venv \
     && . .venv/bin/activate \
     && python -m pip install --requirement requirements.pip
