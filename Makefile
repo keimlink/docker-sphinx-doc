@@ -31,7 +31,7 @@ fix: ## Run xo and fix files in-place
 	docker-compose run --rm node yarn xo --fix
 
 .PHONY: shellcheck
-shellcheck: ## Run shellcheck
+shellcheck: ## Run shell lint checks
 	find . $(FIND_EXCLUDE_PATHS) -name "*.sh" -exec $(SHELLCHECK) {} +
 
 .PHONY: lint
