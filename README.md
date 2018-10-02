@@ -69,7 +69,7 @@ docker run -it -p 8000:8000 --rm -v "$(pwd)/docs":/home/python/docs sphinx-autob
 
 The documentation should served at <http://127.0.0.1:8000>. It will be rebuild when a file is changed.
 
-## Image Variants
+## Image variants
 
 The `sphinx-doc` images come in many flavours, each designed for a specific use case.
 
@@ -85,7 +85,7 @@ This is the defacto image. If you are unsure about what your needs are, you prob
 
 ## `sphinx-doc:latex`
 
-This image is based off of [python](https://hub.docker.com/_/python/) and contains all packages needed to build the LaTeX documentation. Because it's based off of [buildpack-deps](https://registry.hub.docker.com/_/buildpack-deps/) and has a large number of extremely common Debian packages.
+This image is based off of [python](https://hub.docker.com/_/python/) and contains all packages needed to build the LaTeX documentation. Because the python image is based on [buildpack-deps](https://registry.hub.docker.com/_/buildpack-deps/) and includes large number of common Debian packages the resulting image is much larger than the other variant.
 
 ## Code of Conduct
 
