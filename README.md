@@ -9,18 +9,18 @@
 
 A Docker image for [Sphinx](http://www.sphinx-doc.org/), a documentation tool written in Python.
 
-## Supported tags and respective `Dockerfile` links
+## Supported Tags and Respective `Dockerfile` Links
 
 *   `1.7.1`, `latest` ([Dockerfile](https://github.com/keimlink/docker-sphinx-doc/blob/master/Dockerfile)) [![Image download size and number of layers](https://images.microbadger.com/badges/image/keimlink/sphinx-doc.svg)](https://microbadger.com/images/keimlink/sphinx-doc "Image download size and number of layers")
 *   `1.7.1-latex`, `latex` ([Dockerfile.latex](https://github.com/keimlink/docker-sphinx-doc/blob/master/Dockerfile.latex)) [![Image download size and number of layers](https://images.microbadger.com/badges/image/keimlink/sphinx-doc:latex.svg)](https://microbadger.com/images/keimlink/sphinx-doc:latex "Image download size and number of layers")
 
-## What is Sphinx?
+## What Is Sphinx?
 
 [Sphinx](http://www.sphinx-doc.org/) is a tool that makes it easy to create intelligent and beautiful documentation. It has excellent facilities for the documentation of software projects in a range of languages. Output formats like HTML, LaTeX, ePub, Texinfo, manual pages and plain text are supported. More than 50 extensions contributed by users are available.
 
-## How to use this image
+## How to Use This Image
 
-### Use the image for your Sphinx project
+### Use the Image for Your Sphinx Project
 
 First run `sphinx-quickstart` to set up a source directory and a configuration:
 
@@ -34,7 +34,7 @@ Then build the HTML documentation:
 docker run -it --rm -v "$(pwd)/docs":/home/python/docs keimlink/sphinx-doc:1.7.1 make -C docs html
 ```
 
-### Create a `Dockerfile` for your Sphinx project
+### Create a `Dockerfile` for Your Sphinx Project
 
 If you want to extend the image you can create a `Dockerfile` for your Sphinx project. In this example [sphinx-autobuild](https://github.com/GaretJax/sphinx-autobuild) will be used to rebuild the documentation when a change is detected.
 
@@ -68,7 +68,7 @@ docker run -it -p 8000:8000 --rm -v "$(pwd)/docs":/home/python/docs sphinx-autob
 
 The documentation should served at <http://127.0.0.1:8000>. It will be rebuild when a file is changed.
 
-## Image variants
+## Image Variants
 
 The `sphinx-doc` images come in many flavours, each designed for a specific use case.
 
