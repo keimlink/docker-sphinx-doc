@@ -1,4 +1,4 @@
-FROM node:8.9.4-alpine
+FROM node:8.17.0-alpine
 
 COPY bin/docker-entrypoint-node.sh /usr/local/bin/docker-entrypoint.sh
 
