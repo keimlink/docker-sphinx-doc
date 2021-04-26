@@ -7,7 +7,7 @@
   "author": "Markus Zapke-Gründemann <markus@keimlink.de>",
   "license": "BSD-3-Clause",
   "devDependencies": {
-    "danger": "4.0.1",
+    "danger": "10.6.4",
     "eclint": "2.8.0",
     "markdownlint-cli": "0.13.0",
     "prettier": "1.11.1",
