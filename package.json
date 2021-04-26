@@ -10,7 +10,7 @@
     "danger": "4.0.1",
     "eclint": "2.8.0",
     "markdownlint-cli": "0.13.0",
-    "prettier": "1.11.1",
+    "prettier": "1.19.1",
     "prettier-check": "2.0.0",
     "xo": "0.20.3"
   },
