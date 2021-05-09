@@ -1,4 +1,4 @@
-FROM python:3.6.4-alpine3.7@sha256:10bd7a59cfac2a784bedd1e6d89887995559f00b61f005a101845ed736bed779
+FROM python:3.7.2-alpine3.7@sha256:35f6f83ab08f98c727dbefd53738e3b3174a48b4571ccb1910bae480dcdba847
 
 RUN apk add --no-cache enchant make
 
