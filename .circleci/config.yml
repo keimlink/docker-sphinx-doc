@@ -95,7 +95,7 @@ jobs:
           name: Push Docker images to registry
   shellcheck:
     docker:
-      - image: koalaman/shellcheck-alpine:v0.4.7
+      - image: koalaman/shellcheck-alpine:v0.10.0
     steps:
       - checkout
       - run:
