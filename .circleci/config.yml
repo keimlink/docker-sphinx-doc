@@ -7,7 +7,7 @@ aliases:
       - image: docker:17.09.1-ce-git
   docker-node: &docker-node
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:8.17.0
   persist-docker-images: &persist-docker-images
     persist_to_workspace:
       root: .
